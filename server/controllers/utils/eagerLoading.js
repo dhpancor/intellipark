@@ -6,14 +6,20 @@ module.exports = function(req, db) {
         const query = {
             include: []
         };
-        if ('withUser' in req.query)
-            query.include.push(db.User);
 
-        if ('withAccessLog' in req.query)
-            query.include.push(db.AccessLog);
+        if ('withAll' in req.query)
+            query.include.push({ all: true, nested: true });
+        else {
+            if ('withUser' in req.query)
+                query.include.push(db.User);
 
-        if ('withVehicle' in req.query)
-            query.include.push(db.Vehicle);
+            if ('withAccessLog' in req.query)
+                query.include.push(db.AccessLog);
+
+            if ('withVehicle' in req.query)
+                query.include.push(db.Vehicle);
+
+        }
 
         return query;
     }

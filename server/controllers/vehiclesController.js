@@ -34,7 +34,7 @@ module.exports = {
     update: async function (req, res, next) {
         let data = null;
         try {
-            data = await Vehicle.update(req.params, {
+            data = await Vehicle.update(req.body, {
                 where: {
                     id: req.params.id
                 }
