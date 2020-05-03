@@ -1,12 +1,13 @@
 const db = require("../models/");
 const Vehicle = db.Vehicle;
 const Response = require("./utils/jsonResponse");
+const eagerLoading = require("./utils/eagerLoading");
 
 module.exports = {
     findAll: async function (req, res, next) {
         let data = null;
         try {
-            data = await Vehicle.findAll();
+            data = await Vehicle.findAll(eagerLoading(req, db));
         } catch (e) {
             console.log(e)
         }
@@ -15,7 +16,7 @@ module.exports = {
     findOne: async function (req, res, next) {
         let data = null;
         try {
-            data = await Vehicle.findByPk(req.params.id);
+            data = await Vehicle.findByPk(req.params.id, eagerLoading(req, db));
         } catch (e) {
             console.log(e)
         }

@@ -1,12 +1,14 @@
 const db = require("../models/");
 const User = db.User;
 const Response = require("./utils/jsonResponse");
+const eagerLoading = require("./utils/eagerLoading");
+
 
 module.exports = {
     findAll: async function (req, res, next) {
         let data = null;
         try {
-            data = await User.findAll();
+            data = await User.findAll(eagerLoading(req, db));
         } catch (e) {
             console.log(e)
         }
@@ -14,10 +16,9 @@ module.exports = {
     },
     findOne: async function (req, res, next) {
         let data = null;
+        console.log(req.query);
         try {
-            data = await User.findByPk(req.params.id, req.query.eager ? {
-                include: db.Vehicle
-            } : {});
+            data = await User.findByPk(req.params.id, eagerLoading(req, db));
         } catch (e) {
             console.log(e)
         }
@@ -35,7 +36,7 @@ module.exports = {
     update: async function (req, res, next) {
         let data = null;
         try {
-            data = await User.update(req.params, {
+            data = await User.update(req.body, {
                 where: {
                     id: req.params.id
                 }
