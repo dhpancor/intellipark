@@ -15,7 +15,9 @@ module.exports = {
     findOne: async function (req, res, next) {
         let data = null;
         try {
-            data = await User.findByPk(req.params.id);
+            data = await User.findByPk(req.params.id, req.query.eager ? {
+                include: db.Vehicle
+            } : {});
         } catch (e) {
             console.log(e)
         }
