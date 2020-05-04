@@ -3,6 +3,6 @@ const routes = express.Router();
 
 routes.use('/users', require('./users'));
 routes.use('/vehicles', require('./vehicles'));
-// routes.use('/accesses', require('./accesses'));
+routes.use('/accesslog', require('./accesslog'));
 
 module.exports = routes;
