@@ -1,0 +1,71 @@
+<mat-card style="margin: 20px;">
+  <mat-card-title> {{ creatingPlate ? 'Crear' : 'Editar'}} matrícula</mat-card-title>
+  <form [formGroup]="plateForm" (ngSubmit)="onSubmit()" class="plate-form">
+    <mat-form-field>
+      <input matInput formControlName="plate" placeholder="Matrícula" oninput="this.value = this.value.toUpperCase().replace(' ', '')" maxlength="7" required>
+      <mat-error
+        *ngIf="plateForm.get('plate').errors
+        && (plateForm.get('plate').dirty||plateForm.get('plate').touched)
+        && plateForm.get('plate').errors.validPlate">
+        La matrícula no es válida (Formato: 1234ABC)
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput formControlName="description" placeholder="Descripción" required></textarea>
+      <mat-error
+        *ngIf="plateForm.get('description').errors
+        && (plateForm.get('description').dirty||plateForm.get('description').touched)
+        && plateForm.get('description').errors.required">
+        Este campo es obligatorio.
+      </mat-error>
+      <mat-error
+        *ngIf="plateForm.get('description').errors
+        && (plateForm.get('description').dirty||plateForm.get('description').touched)
+        && plateForm.get('description').errors.minlength">
+        Debes de escribir al menos {{ plateForm.get('description').errors.minlength.requiredLength }} caracteres (llevas {{ plateForm.get('description').errors.minlength.actualLength }}).
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tipo de acceso</mat-label>
+      <mat-select formControlName="accessType" [(value)]="plateObject.accessType" required>
+        <mat-option value="student">Alumno</mat-option>
+        <mat-option value="teacher">Profesor</mat-option>
+        <mat-option value="other">Otro</mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="plateForm.get('accessType').errors
+        && (plateForm.get('accessType').dirty||plateForm.get('accessType').touched)
+        && plateForm.get('accessType').errors.required">
+        Este campo es obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" matInput formControlName="accessLog" placeholder="Numero de accesos" min="0" max="99999">
+      <mat-error
+        *ngIf="plateForm.get('accessLog').errors
+        && (plateForm.get('accessLog').dirty||plateForm.get('accessLog').touched)
+        && plateForm.get('accessLog').errors.required">
+        Este campo es obligatorio.
+      </mat-error>
+      <mat-error
+        *ngIf="plateForm.get('accessLog').errors
+        && (plateForm.get('accessLog').dirty||plateForm.get('accessLog').touched)
+        && plateForm.get('accessLog').errors.min">
+        El valor mínimo es {{ plateForm.get('accessLog').errors.min.min }}.
+      </mat-error>
+      <mat-error
+        *ngIf="plateForm.get('accessLog').errors
+        && (plateForm.get('accessLog').dirty||plateForm.get('accessLog').touched)
+        && plateForm.get('accessLog').errors.max">
+        El valor máximo es {{ plateForm.get('accessLog').errors.max.max }}.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="isActive" (change)="plateObject.isActive = !plateObject.isActive">¿Está activa la matrícula?</mat-checkbox>
+
+    <button mat-stroked-button type="submit" color="accent" [disabled]="loadingRequest || !plateForm.valid || !plateForm.dirty"><mat-icon aria-hidden="false" aria-label="Save icon">save</mat-icon> Guardar</button>
+  </form>
+</mat-card>

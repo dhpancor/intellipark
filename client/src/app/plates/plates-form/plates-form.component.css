@@ -1,0 +1,8 @@
+.plate-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.plate-form > * {
+  width: 100%;
+}
