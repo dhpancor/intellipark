@@ -1,7 +1,10 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Vehicle = sequelize.define('Vehicle', {
-    plate: DataTypes.STRING,
+    plate: {
+      type: DataTypes.STRING,
+      unique: true
+    },
     initialAccessTime: {
       type: DataTypes.TIME,
       allowNull: false

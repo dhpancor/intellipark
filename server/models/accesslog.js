@@ -1,10 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const AccessLog = sequelize.define('AccessLog', {
-    type: DataTypes.ENUM({
-      values: ['success', 'failure']
-    }),
-    data: DataTypes.STRING
+    plate: DataTypes.STRING,
+    hasLeft: {
+      type: DataTypes.BOOLEAN,
+      default: '0'
+    }
   }, {
     timestamps: true,
     paranoid: true
