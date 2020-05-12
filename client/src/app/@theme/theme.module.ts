@@ -19,8 +19,9 @@ import { NbSecurityModule } from '@nebular/security';
 import {
   FooterComponent,
   HeaderComponent,
+  LayoutDirectionSwitcherComponent,
   SearchInputComponent,
-  TinyMCEComponent,
+  SwitcherComponent,
 } from './components';
 import {
   CapitalizePipe,
@@ -54,10 +55,11 @@ const NB_MODULES = [
   NbEvaIconsModule,
 ];
 const COMPONENTS = [
+  SwitcherComponent,
+  LayoutDirectionSwitcherComponent,
   HeaderComponent,
   FooterComponent,
   SearchInputComponent,
-  TinyMCEComponent,
   OneColumnLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
@@ -76,8 +78,8 @@ const PIPES = [
   declarations: [...COMPONENTS, ...PIPES],
 })
 export class ThemeModule {
-  static forRoot(): ModuleWithProviders<ThemeModule> {
-    return {
+  static forRoot(): ModuleWithProviders {
+    return <ModuleWithProviders>{
       ngModule: ThemeModule,
       providers: [
         ...NbThemeModule.forRoot(

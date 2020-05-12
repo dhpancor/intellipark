@@ -20,6 +20,7 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import {NbAuthModule, NbDummyAuthStrategy} from '@nebular/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,9 @@ import {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+
+    ThemeModule.forRoot(),
+
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbDatepickerModule.forRoot(),
@@ -38,7 +42,12 @@ import {
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
-    ThemeModule.forRoot(),
+    NbAuthModule.forRoot({
+      strategies: [NbDummyAuthStrategy.setup({
+        name: 'email',
+        alwaysFail: false,
+      })],
+    }),
   ],
   bootstrap: [AppComponent],
 })
