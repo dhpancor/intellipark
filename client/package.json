@@ -43,6 +43,7 @@
     "@nebular/eva-icons": "4.1.2",
     "@nebular/security": "4.1.2",
     "@nebular/theme": "4.1.2",
+    "@swimlane/ngx-datatable": "^17.0.0",
     "bootstrap": "4.3.1",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.1",
@@ -88,6 +89,6 @@
     "ts-node": "3.2.2",
     "tslint": "^5.7.0",
     "tslint-language-service": "^0.9.9",
-    "typescript": "3.4.5"
+    "typescript": "~3.4.5"
   }
 }

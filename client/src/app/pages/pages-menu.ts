@@ -4,33 +4,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
     icon: 'home-outline',
-    link: '/pages/dashboard',
+    link: '/app/dashboard',
     home: true,
   },
   {
-    title: 'FEATURES',
-    group: true,
+    title: 'Clients',
+    icon: 'people-outline',
+    link: '/app/clients',
   },
   {
-    title: 'Auth',
-    icon: 'lock-outline',
-    children: [
-      {
-        title: 'Login',
-        link: '/auth/login',
-      },
-      {
-        title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
+    title: 'Vehicles',
+    icon: 'car-outline',
+    link: '/app/vehicles',
+  },
+  {
+    title: 'Access History',
+    icon: 'book-open-outline',
+    link: '/app/access-history',
   },
 ];
