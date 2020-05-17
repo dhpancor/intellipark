@@ -1,14 +1,14 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
-import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
-import { of as observableOf } from 'rxjs';
+import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NbAuthModule, NbDummyAuthStrategy} from '@nebular/auth';
+import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
+import {of as observableOf} from 'rxjs';
 
-import { throwIfAlreadyLoaded } from './module-import-guard';
-import { AnalyticsService } from './utils';
-import { UserData } from './data/users';
-import { UserService } from './mock/users.service';
-import { MockDataModule } from './mock/mock-data.module';
+import {throwIfAlreadyLoaded} from './module-import-guard';
+import {AnalyticsService} from './utils';
+import {UserData} from './data/users';
+import {UserService} from './mock/users.service';
+import {MockDataModule} from './mock/mock-data.module';
 
 const socialLinks = [
   {
