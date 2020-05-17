@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       type: {
-        type: Sequelize.ENUM
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
