@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {ClientsListComponent} from "./clients-list/clients-list.component";
 import {NbCardModule, NbInputModule, NbSelectModule} from "@nebular/theme";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
