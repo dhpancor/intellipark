@@ -5,7 +5,7 @@
         <form class="form-inlin">
             <nb-select placeholder="Search by..." (selectedChange)="updateFilter($event)" size="medium">
               <nb-option [value]="null">Clear filter</nb-option>
-              <nb-option *ngFor="let column of this.columns" [value]="column.prop">{{ column.display }}</nb-option>
+              <nb-option *ngFor="let column of this.columns" [value]="column.prop">{{ column.name }}</nb-option>
             </nb-select>
             <input
               #searchQuery
@@ -26,15 +26,14 @@
           #table
           class="material"
           [rows]="rows"
-          [columns]="columns"
           [columnMode]="ColumnMode.force"
+          [columns]="columns"
           [headerHeight]="50"
           [footerHeight]="50"
-          [limit]="20"
+          [limit]="10"
           rowHeight="auto"
           reorderable="true"
-        >
-        </ngx-datatable>
+        ></ngx-datatable>
       </nb-card-body>
     </nb-card>
   </div>

@@ -1,5 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ColumnMode, DatatableComponent} from "@swimlane/ngx-datatable";
+import {ClientsService} from "../../../providers/clients.service";
+import {Client} from "../../../models/client";
 
 @Component({
   selector: 'ngx-clients-list',
@@ -7,25 +9,27 @@ import {ColumnMode, DatatableComponent} from "@swimlane/ngx-datatable";
 })
 export class ClientsListComponent implements OnInit {
   currentFilter = null;
-  temp = [];
-  rows = [];
-  columns = [{ prop: 'name', display: 'Name' }, { prop: 'gender', display: 'Gender' }, { prop: 'company', display: 'Company' }];
+  temp: Client[] = [];
+  rows: Client[] = [];
+  columns = [
+    { prop: 'id', name: '#'},
+    { prop: 'dni', name: 'DNI' },
+    { prop: 'first_name', name: 'First Name' },
+    { prop: 'last_name', name: 'Last Name' },
+    { prop: 'email', name: 'Email' },
+    { prop: 'gender', name: 'Gender' },
+    { prop: 'active', name: 'Active' }];
   @ViewChild(DatatableComponent, {static: false}) table: DatatableComponent;
   @ViewChild("searchQuery", {static: false}) searchQuery: ElementRef;
 
 
   ColumnMode = ColumnMode;
 
-  constructor() {
-    // once we fetch the data, we store it in temp
-    // and rows
-    const data = [
-      { name: 'Austin', gender: 'Male', company: 'Swimlane' },
-      { name: 'Dany', gender: 'Male', company: 'KFC' },
-      { name: 'Molly', gender: 'Female', company: 'Burger King' }
-    ];
-    this.temp = data;
-    this.rows = data;
+  constructor(private clientsService: ClientsService) {
+    this.clientsService.findAll().subscribe(clients => {
+      this.temp = clients;
+      this.rows = clients;
+    });
   }
 
   ngOnInit() {
