@@ -1,8 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ClientsListComponent} from "./clients-list/clients-list.component";
-import {NbCardModule, NbInputModule, NbSelectModule} from "@nebular/theme";
+import {NbButtonModule, NbCardModule, NbInputModule, NbSelectModule} from "@nebular/theme";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [ClientsListComponent],
@@ -11,7 +12,9 @@ import {NgxDatatableModule} from "@swimlane/ngx-datatable";
     NbCardModule,
     NgxDatatableModule,
     NbInputModule,
-    NbSelectModule
+    NbSelectModule,
+    NbButtonModule,
+    RouterModule
   ]
 })
 export class ClientsModule { }

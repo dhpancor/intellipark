@@ -45,6 +45,7 @@ export class ClientsListComponent implements OnInit {
     if (event !== null) {
       const val = event.target.value.toLowerCase();
       this.rows = this.temp.filter(d => d[this.currentFilter].toLowerCase().indexOf(val) !== -1 || !val);
+
       // Whenever the filter changes, always go back to the first page
       this.table.offset = 0;
     } else {

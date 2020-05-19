@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-xl-12">
     <nb-card>
-      <nb-card-body>
-        <form class="form-inlin">
+      <nb-card-body style="display: flex; justify-content: space-between">
+        <form class="form-inline">
             <nb-select placeholder="Search by..." (selectedChange)="updateFilter($event)" size="medium">
               <nb-option [value]="null">Clear filter</nb-option>
               <nb-option *ngFor="let column of this.columns" [value]="column.prop">{{ column.name }}</nb-option>
@@ -17,6 +17,9 @@
               [disabled]="this.currentFilter === null"
             />
         </form>
+        <div style="float: right">
+          <a [routerLink]="['new']" nbButton>CREATE</a>
+        </div>
       </nb-card-body>
     </nb-card>
     <nb-card>
