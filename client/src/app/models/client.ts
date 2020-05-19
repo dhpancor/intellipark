@@ -4,9 +4,10 @@ export interface Client {
   last_name: string;
   email: string;
   gender: string;
-  comments: string;
+  dni: string;
+  comments: string | null;
   active: boolean;
-  createdAt: Date | null;
-  updatedAt: Date | null;
-  deletedAt: Date | null;
+  createdAt?: Date | null;
+  updatedAt?: Date | null;
+  deletedAt?: Date | null;
 }
