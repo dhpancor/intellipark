@@ -1,9 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {ClientsService} from "../../../providers/clients.service";
 import {Client} from "../../../models/client";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {log} from "util";
+import {NbToastrService} from "@nebular/theme";
 
 @Component({
   selector: 'ngx-clients-form',
@@ -11,7 +12,8 @@ import {log} from "util";
 })
 export class ClientsFormComponent implements OnInit {
 
-  constructor(private clientService: ClientsService, public route: ActivatedRoute, private fb: FormBuilder) {
+  constructor(private clientService: ClientsService, public route: ActivatedRoute, private fb: FormBuilder,
+              private nbToastrService: NbToastrService, private router: Router) {
   }
 
   client: Client = null;
@@ -38,9 +40,9 @@ export class ClientsFormComponent implements OnInit {
     this.client.comments = this.form.get('comments').value;
 
     if (this.route.snapshot.params.id === 'new') {
-      this.clientService.create(this.client).subscribe(r => console.log(r));
+      this.clientService.create(this.client).subscribe(_ => this.successfulOperation());
     } else {
-      this.clientService.update(this.client).subscribe(r => console.log(r));
+      this.clientService.update(this.client).subscribe(_ => this.successfulOperation());
     }
   }
 
@@ -53,5 +55,10 @@ export class ClientsFormComponent implements OnInit {
       gender: this.client.gender,
       comments: this.client.comments,
     });
+  }
+
+  successfulOperation(): void {
+    this.nbToastrService.show("Operation successful!", "Done", {status: 'success'});
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 }

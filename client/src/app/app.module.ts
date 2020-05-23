@@ -48,6 +48,7 @@ import {NbAuthModule, NbDummyAuthStrategy} from '@nebular/auth';
         alwaysFail: false,
       })],
     }),
+    NbToastrModule.forRoot(),
   ],
   bootstrap: [AppComponent],
 })
