@@ -41,9 +41,9 @@ export class ClientsFormComponent implements OnInit {
       this.client.comments = this.form.get('comments').value;
 
       if (this.route.snapshot.params.id === 'new') {
-        this.clientService.create(this.client).subscribe(_ => this.successfulOperation());
+        this.clientService.create(this.client).subscribe(r => r !== null ? this.successfulOperation() : this.operationError());
       } else {
-        this.clientService.update(this.client).subscribe(_ => this.successfulOperation());
+        this.clientService.update(this.client).subscribe(r => r !== null ? this.successfulOperation() : this.operationError());
       }
     }
   }
@@ -62,5 +62,9 @@ export class ClientsFormComponent implements OnInit {
   successfulOperation(): void {
     this.nbToastrService.show("Operation successful!", "Done", {status: 'success'});
     this.router.navigate(['../'], {relativeTo: this.route});
+  }
+
+  operationError(): void {
+    this.nbToastrService.show("There was an error. Try again please.", "Ooops!", {status: 'danger'});
   }
 }

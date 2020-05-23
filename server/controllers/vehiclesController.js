@@ -11,7 +11,7 @@ module.exports = {
         } catch (e) {
             console.log(e)
         }
-        res.json(new Response(Boolean(data), data));
+        res.json(new Response(data !== null, data));
     },
     findOne: async function (req, res, next) {
         let data = null;
@@ -20,7 +20,7 @@ module.exports = {
         } catch (e) {
             console.log(e)
         }
-        res.json(new Response(Boolean(data), data));
+        res.json(new Response(data !== null, data));
     },
     create: async function (req, res, next) {
         let data = null;
@@ -29,7 +29,7 @@ module.exports = {
         } catch (e) {
             console.log(e)
         }
-        res.json(new Response(Boolean(data), data));
+        res.json(new Response(data !== null, data));
     },
     update: async function (req, res, next) {
         let data = null;
@@ -42,7 +42,7 @@ module.exports = {
         } catch (e) {
             console.log(e)
         }
-        res.json(new Response(Boolean(data), data));
+        res.json(new Response(data !== null, data));
     },
     delete: async function (req, res, next) {
         let data = null;
@@ -55,6 +55,6 @@ module.exports = {
         } catch (e) {
             console.log(e)
         }
-        res.json(new Response(Boolean(data), data));
+        res.json(new Response(data !== null, data));
     }
 };

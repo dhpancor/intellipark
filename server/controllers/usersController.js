@@ -10,9 +10,9 @@ module.exports = {
         try {
             data = await User.findAll(eagerLoading(req, db));
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
-        res.json(new Response(Boolean(data), data));
+        res.json(new Response(data !== null, data));
     },
     findOne: async function (req, res, next) {
         let data = null;
@@ -20,18 +20,18 @@ module.exports = {
         try {
             data = await User.findByPk(req.params.id, eagerLoading(req, db));
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
-        res.json(new Response(Boolean(data), data));
+        res.json(new Response(data !== null, data));
     },
     create: async function (req, res, next) {
         let data = null;
         try {
             data = await User.create(req.body);
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
-        res.json(new Response(Boolean(data), data));
+        res.json(new Response(data !== null, data));
     },
     update: async function (req, res, next) {
         let data = null;
@@ -42,9 +42,9 @@ module.exports = {
                 }
             });
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
-        res.json(new Response(Boolean(data), data));
+        res.json(new Response(data !== null, data));
     },
     delete: async function (req, res, next) {
         let data = null;
@@ -55,8 +55,8 @@ module.exports = {
                 }
             });
         } catch (e) {
-            console.log(e)
+            console.log(e);
         }
-        res.json(new Response(Boolean(data), data));
+        res.json(new Response(data !== null, data));
     }
 };
