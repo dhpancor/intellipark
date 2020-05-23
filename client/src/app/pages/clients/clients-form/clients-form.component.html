@@ -8,7 +8,8 @@
           <div class="form-group row">
             <label for="dni" class="col-sm-2 col-form-label">DNI or equivalent</label>
             <div class="col-sm-10">
-              <input nbInput fullWidth formControlName="dni" class="form-control" id="dni" type="text" aria-describedby="dniHelp" placeholder="Enter the DNI" required>
+              <input nbInput fullWidth [status]="this.form.get('dni').errors && this.form.get('dni').touched ? 'danger' : ''" formControlName="dni" class="form-control" id="dni" type="text" aria-describedby="dniHelp" placeholder="Enter the DNI">
+              <small [hidden]="!(this.form.get('dni').errors && this.form.get('dni').touched)" class="text-danger">Enter a valid DNI please.</small>
               <small id="dniHelp" class="form-text text-muted">DNI, NIF, NIE or the identification number for this client.</small>
             </div>
           </div>
@@ -16,32 +17,36 @@
           <div class="form-group row">
             <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
             <div class="col-sm-10">
-              <input nbInput fullWidth formControlName="first_name" class="form-control" id="first_name" type="text" placeholder="Enter the first name" required>
+              <input nbInput fullWidth [status]="this.form.get('first_name').errors && this.form.get('first_name').touched ? 'danger' : ''" formControlName="first_name" class="form-control" id="first_name" type="text" placeholder="Enter the first name">
+              <small [hidden]="!(this.form.get('first_name').errors && this.form.get('first_name').touched)" class="text-danger">Enter a valid first name please.</small>
             </div>
           </div>
 
           <div class="form-group row">
             <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
             <div class="col-sm-10">
-              <input nbInput fullWidth formControlName="last_name" class="form-control" id="last_name" type="text" placeholder="Enter the last name" required>
+              <input nbInput fullWidth [status]="this.form.get('last_name').errors && this.form.get('last_name').touched ? 'danger' : ''" formControlName="last_name" class="form-control" id="last_name" type="text" placeholder="Enter the last name">
+              <small [hidden]="!(this.form.get('last_name').errors && this.form.get('last_name').touched)" class="text-danger">Enter a valid last name please.</small>
             </div>
           </div>
 
           <div class="form-group row">
             <label for="email" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-              <input nbInput fullWidth formControlName="email" class="form-control" id="email" type="email" placeholder="example@domain.com" required>
+              <input nbInput fullWidth [status]="this.form.get('email').errors && this.form.get('email').touched ? 'danger' : ''" formControlName="email" class="form-control" id="email" type="email" placeholder="example@domain.com">
+              <small [hidden]="!(this.form.get('email').errors && this.form.get('email').touched)" class="text-danger">Enter a valid email please.</small>
             </div>
           </div>
 
           <div class="form-group row">
             <label for="gender" class="col-sm-2 col-form-label">Gender</label>
             <div class="col-sm-10">
-              <nb-select id='gender' formControlName="gender" placeholder="Gender" required>
+              <nb-select id='gender' fullWidth [status]="this.form.get('gender').errors && this.form.get('gender').dirty ? 'danger' : ''" formControlName="gender" placeholder="Gender">
                 <nb-option [value]="'Male'">Male</nb-option>
                 <nb-option [value]="'Female'">Female</nb-option>
                 <nb-option [value]="'Other'">Other</nb-option>
               </nb-select>
+              <small [hidden]="!(this.form.get('gender').errors && this.form.get('gender').dirty)" class="text-danger">Enter a valid gender please.</small>
             </div>
           </div>
 
@@ -54,7 +59,7 @@
             </div>
           </div>
 
-          <button type="submit" nbButton>Save</button>
+          <button type="submit" fullWidth nbButton [disabled]="!(this.form.valid && this.form.dirty)">Save</button>
         </form>
       </nb-card-body>
     </nb-card>
