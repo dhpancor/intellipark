@@ -11,7 +11,7 @@ import {log} from "util";
 })
 export class ClientsFormComponent implements OnInit {
 
-  constructor(private clientService: ClientsService, private route: ActivatedRoute, private fb: FormBuilder) {
+  constructor(private clientService: ClientsService, public route: ActivatedRoute, private fb: FormBuilder) {
   }
 
   client: Client = null;

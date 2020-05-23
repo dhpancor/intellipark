@@ -69,8 +69,6 @@ module.exports = {
       };
     });
 
-    console.log(data[0])
-
     return queryInterface.bulkInsert('Users', data)
   },
 
