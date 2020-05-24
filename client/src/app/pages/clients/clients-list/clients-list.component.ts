@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ColumnMode, DatatableComponent} from "@swimlane/ngx-datatable";
 import {ClientsService} from "../../../providers/clients.service";
 import {Client} from "../../../models/client";
+import {NbToastrService} from "@nebular/theme";
 
 @Component({
   selector: 'ngx-clients-list',
@@ -25,7 +26,7 @@ export class ClientsListComponent implements OnInit {
 
   ColumnMode = ColumnMode;
 
-  constructor(private clientsService: ClientsService) {
+  constructor(private clientsService: ClientsService, private nbToastrService: NbToastrService) {
     this.clientsService.findAll().subscribe(clients => {
       this.temp = clients;
       this.rows = clients;
@@ -52,6 +53,14 @@ export class ClientsListComponent implements OnInit {
       this.rows = [...this.temp];
       this.table.offset = 0;
     }
+  }
+
+  deleteListItem(client: Client) {
+    this.clientsService.delete(client.id).subscribe(() => {
+      this.temp = this.temp.filter(item => item !== client);
+      this.rows = this.rows.filter(item => item !== client);
+      this.nbToastrService.show(`Client ${client.first_name} deleted successfully.`, `Done`);
+    });
   }
 
 }
