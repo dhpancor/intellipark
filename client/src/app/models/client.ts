@@ -6,7 +6,6 @@ export interface Client {
   gender: string;
   dni: string;
   comments: string | null;
-  active: boolean;
   createdAt?: Date | null;
   updatedAt?: Date | null;
   deletedAt?: Date | null;

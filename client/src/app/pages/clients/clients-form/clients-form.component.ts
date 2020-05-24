@@ -3,7 +3,6 @@ import {ClientsService} from "../../../providers/clients.service";
 import {Client} from "../../../models/client";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {log} from "util";
 import {NbToastrService} from "@nebular/theme";
 
 @Component({

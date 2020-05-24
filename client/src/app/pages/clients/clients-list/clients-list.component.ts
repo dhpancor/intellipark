@@ -18,8 +18,7 @@ export class ClientsListComponent implements OnInit {
     { prop: 'first_name', name: 'First Name' },
     { prop: 'last_name', name: 'Last Name' },
     { prop: 'email', name: 'Email' },
-    { prop: 'gender', name: 'Gender' },
-    { prop: 'active', name: 'Active' }];
+    { prop: 'gender', name: 'Gender' }];
   @ViewChild(DatatableComponent, {static: false}) table: DatatableComponent;
   @ViewChild("searchQuery", {static: false}) searchQuery: ElementRef;
 

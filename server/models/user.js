@@ -25,10 +25,6 @@ module.exports = (sequelize, DataTypes) => {
     comments: {
       type: DataTypes.STRING,
       allowNull: true
-    },
-    active: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: '1'
     }
   }, {
     timestamps: true,
