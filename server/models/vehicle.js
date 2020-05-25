@@ -4,15 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     plate: {
       type: DataTypes.STRING,
       unique: true
-    },
-    initialAccessTime: {
-      type: DataTypes.TIME,
-      allowNull: false
-    },
-    finalAccessTime: {
-      type: DataTypes.TIME,
-      allowNull: false
-    },
+    }
   }, {
     timestamps: true,
     paranoid: true

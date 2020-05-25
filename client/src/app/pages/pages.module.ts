@@ -6,6 +6,7 @@ import {PagesComponent} from './pages.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {PagesRoutingModule} from './pages-routing.module';
 import {ClientsModule} from './clients/clients.module';
+import {VehiclesModule} from './vehicles/vehicles.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import {ClientsModule} from './clients/clients.module';
     NbMenuModule,
     DashboardModule,
     ClientsModule,
+    VehiclesModule,
   ],
   declarations: [
     PagesComponent,

@@ -29,4 +29,5 @@ import {ReactiveFormsModule} from "@angular/forms";
     NbActionsModule
   ]
 })
-export class ClientsModule { }
+export class ClientsModule {
+}

@@ -1,65 +1,27 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ColumnMode, DatatableComponent} from "@swimlane/ngx-datatable";
+import {Component, OnInit} from '@angular/core';
 import {ClientsService} from "../../../providers/clients.service";
 import {Client} from "../../../models/client";
 import {NbToastrService} from "@nebular/theme";
+import {SortableDatatable} from "../../sortable-datatable";
 
 @Component({
   selector: 'ngx-clients-list',
   templateUrl: './clients-list.component.html',
 })
-export class ClientsListComponent implements OnInit {
-  currentFilter = null;
-  temp: Client[] = [];
-  rows: Client[] = [];
+export class ClientsListComponent extends SortableDatatable<Client> implements OnInit {
   columns = [
-    { prop: 'id', name: '#'},
-    { prop: 'dni', name: 'DNI' },
-    { prop: 'first_name', name: 'First Name' },
-    { prop: 'last_name', name: 'Last Name' },
-    { prop: 'email', name: 'Email' },
-    { prop: 'gender', name: 'Gender' }];
-  @ViewChild(DatatableComponent, {static: false}) table: DatatableComponent;
-  @ViewChild("searchQuery", {static: false}) searchQuery: ElementRef;
+    {prop: 'id', name: '#'},
+    {prop: 'dni', name: 'DNI'},
+    {prop: 'first_name', name: 'First Name'},
+    {prop: 'last_name', name: 'Last Name'},
+    {prop: 'email', name: 'Email'},
+    {prop: 'gender', name: 'Gender'}];
 
-
-  ColumnMode = ColumnMode;
-
-  constructor(private clientsService: ClientsService, private nbToastrService: NbToastrService) {
-    this.clientsService.findAll().subscribe(clients => {
-      this.temp = clients;
-      this.rows = clients;
-    });
+  constructor(public clientsService: ClientsService, public nbToastrService: NbToastrService) {
+    super(clientsService, nbToastrService);
   }
 
   ngOnInit() {
-  }
-
-  updateFilter(value) {
-    this.currentFilter = value;
-    this.searchQuery.nativeElement.value = "";
-    this.filterResults(null);
-  }
-
-  filterResults(event) {
-    if (event !== null) {
-      const val = event.target.value.toLowerCase();
-      this.rows = this.temp.filter(d => d[this.currentFilter].toLowerCase().indexOf(val) !== -1 || !val);
-
-      // Whenever the filter changes, always go back to the first page
-      this.table.offset = 0;
-    } else {
-      this.rows = [...this.temp];
-      this.table.offset = 0;
-    }
-  }
-
-  deleteListItem(client: Client) {
-    this.clientsService.delete(client.id).subscribe(() => {
-      this.temp = this.temp.filter(item => item !== client);
-      this.rows = this.rows.filter(item => item !== client);
-      this.nbToastrService.show(`Client ${client.first_name} deleted successfully.`, `Done`);
-    });
   }
 
 }

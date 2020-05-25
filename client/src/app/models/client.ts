@@ -1,3 +1,5 @@
+import {Vehicle} from "./vehicle";
+
 export interface Client {
   id?: number;
   first_name: string;
@@ -9,4 +11,5 @@ export interface Client {
   createdAt?: Date | null;
   updatedAt?: Date | null;
   deletedAt?: Date | null;
+  Vehicles?: Vehicle[];
 }

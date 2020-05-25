@@ -16,7 +16,6 @@ export class SingleClientResolver implements Resolve<Client> {
     if (route.params.id === 'new') {
       client = {
         dni: "",
-        active: true,
         comments: "",
         email: "",
         first_name: "",
