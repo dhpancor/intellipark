@@ -2,6 +2,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 import {map} from "rxjs/operators";
+import {EagerLoadingStrategy} from "./types/eager-loading-strategy.enum";
 
 @Injectable()
 export class BaseCRUD<T> {
@@ -11,13 +12,15 @@ export class BaseCRUD<T> {
   constructor(private httpClient: HttpClient, private specificEndpoint: string | string[]) {
   }
 
-  findOne(id: number): Observable<T> {
-    return this.httpClient.get<T>(this.baseUrl + this.specificEndpoint + `/${id}`)
+  findOne(id: number, eagerLoading?: EagerLoadingStrategy): Observable<T> {
+    const endpointSuffix = `/${id}` + eagerLoading !== undefined ? this.getEagerLoadingEndpoint(eagerLoading) : '';
+    return this.httpClient.get<T>(this.baseUrl + this.specificEndpoint + endpointSuffix)
       .pipe(map(result => result['data']));
   }
 
-  findAll(): Observable<T[]> {
-    return this.httpClient.get<T[]>(this.baseUrl + this.specificEndpoint)
+  findAll(eagerLoading?: EagerLoadingStrategy): Observable<T[]> {
+    const endpointSuffix = eagerLoading !== undefined ? `/${this.getEagerLoadingEndpoint(eagerLoading)}` : '';
+    return this.httpClient.get<T[]>(this.baseUrl + this.specificEndpoint + endpointSuffix)
       .pipe(map(result => result['data']));
   }
 
@@ -34,5 +37,9 @@ export class BaseCRUD<T> {
   delete(id: number): Observable<T> {
     return this.httpClient.delete<T>(this.baseUrl + this.specificEndpoint + `/${id}`)
       .pipe(map(result => result['data']));
+  }
+
+  private getEagerLoadingEndpoint(strategy: EagerLoadingStrategy): string {
+    return `?with${strategy}=true`;
   }
 }

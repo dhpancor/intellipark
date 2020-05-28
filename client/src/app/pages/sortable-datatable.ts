@@ -2,6 +2,8 @@ import {BaseCRUD} from "../providers/base-crud";
 import {NbToastrService} from "@nebular/theme";
 import {ElementRef, ViewChild} from "@angular/core";
 import {ColumnMode, DatatableComponent} from "@swimlane/ngx-datatable";
+import {EagerLoadingStrategy} from "../providers/types/eager-loading-strategy.enum";
+import * as _ from "lodash";
 
 interface DatatableColumn {
   prop: string;
@@ -19,10 +21,11 @@ export class SortableDatatable<T> {
 
   ColumnMode = ColumnMode;
 
-  constructor(public crudService: BaseCRUD<T>, public nbToastrService: NbToastrService) {
-    this.crudService.findAll().subscribe(r => {
+  constructor(public crudService: BaseCRUD<T>, public nbToastrService: NbToastrService, public eagerLoading?: EagerLoadingStrategy) {
+    this.crudService.findAll(eagerLoading).subscribe(r => {
       this.temp = r;
       this.rows = r;
+      console.log(r[0]);
     });
   }
 
@@ -35,7 +38,9 @@ export class SortableDatatable<T> {
   filterResults(event) {
     if (event !== null) {
       const val = event.target.value.toLowerCase();
-      this.rows = this.temp.filter(d => d[this.currentFilter].toLowerCase().indexOf(val) !== -1 || !val);
+      this.rows = this.temp.filter(d => {
+        return _.get(d, this.currentFilter).toLowerCase().indexOf(val) !== -1 || !val;
+      });
 
       // Whenever the filter changes, always go back to the first page
       this.table.offset = 0;
