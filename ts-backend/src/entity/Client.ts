@@ -1,19 +1,13 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  DeleteDateColumn,
   OneToMany
 } from 'typeorm';
 import { Vehicle } from './Vehicle';
+import { BasicEntity } from './BasicEntity';
 
 @Entity()
-export class Client {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Client extends BasicEntity {
   @Column({ name: 'first_name', nullable: false })
   firstName: string;
 
@@ -34,13 +28,4 @@ export class Client {
 
   @OneToMany(() => Vehicle, vehicle => vehicle.client)
   vehicles: Vehicle[];
-
-  @CreateDateColumn()
-  createdAt: string;
-
-  @UpdateDateColumn()
-  updatedAt: string;
-
-  @DeleteDateColumn()
-  deletedAt: string;
 }

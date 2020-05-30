@@ -1,31 +1,20 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  DeleteDateColumn,
   ManyToOne
 } from 'typeorm';
 import { Client } from './Client';
+import { BasicEntity } from './BasicEntity';
+import { AccessLog } from './AccessLog';
 
 @Entity()
-export class Vehicle {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Vehicle extends BasicEntity {
   @Column({ nullable: false })
   plate: string;
 
   @ManyToOne(() => Client, client => client.vehicles)
   client: Client;
 
-  @CreateDateColumn()
-  createdAt: string;
-
-  @UpdateDateColumn()
-  updatedAt: string;
-
-  @DeleteDateColumn()
-  deletedAt: string;
+  @ManyToOne(() => Client, client => client.vehicles)
+  accesslogs: AccessLog[];
 }
