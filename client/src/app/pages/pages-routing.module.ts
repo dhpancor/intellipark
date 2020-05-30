@@ -7,6 +7,8 @@ import {ClientsListComponent} from "./clients/clients-list/clients-list.componen
 import {ClientsFormComponent} from "./clients/clients-form/clients-form.component";
 import {SingleClientResolver} from "../resolvers/single-client.resolver";
 import {VehicleListComponent} from "./vehicles/vehicles-list/vehicle-list.component";
+import {VehiclesFormComponent} from "./vehicles/vehicles-form/vehicles-form.component";
+import {SingleVehicleResolver} from "../resolvers/single-vehicle.resolver";
 
 const routes: Routes = [{
   path: '',
@@ -28,6 +30,11 @@ const routes: Routes = [{
     {
       path: 'vehicles',
       component: VehicleListComponent
+    },
+    {
+      path: 'vehicles/:id',
+      component: VehiclesFormComponent,
+      resolve: {vehicle: SingleVehicleResolver}
     },
     {
       path: '',
