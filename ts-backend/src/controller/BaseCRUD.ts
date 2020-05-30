@@ -28,6 +28,6 @@ export class BaseCRUD {
   remove = async (request: Request, response: Response) => {
     const repository = getRepository(this.entityClass);
     const objectToRemove = await repository.findOne(request.params.id);
-    return response.send(await repository.remove(objectToRemove));
+    return response.send(await repository.softRemove(objectToRemove));
   }
 }
