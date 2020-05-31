@@ -61,7 +61,7 @@ export class BaseCRUD {
     return response.send(await repository.softRemove(objectToRemove));
   }
 
-  eagerLoading = (request: Request): string[] => {
+  private eagerLoading = (request: Request): string[] => {
     if (Object.keys(request.query).length === 0 && request.query.constructor === Object) {
       return [];
     } else {
