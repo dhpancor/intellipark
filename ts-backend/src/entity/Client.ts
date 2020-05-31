@@ -1,7 +1,7 @@
 import {
   Entity,
   Column,
-  OneToMany
+  OneToMany, JoinColumn
 } from 'typeorm';
 import { Vehicle } from './Vehicle';
 import { BasicEntity } from './BasicEntity';
@@ -27,5 +27,5 @@ export class Client extends BasicEntity {
   comments: string;
 
   @OneToMany(() => Vehicle, vehicle => vehicle.client)
-  vehicles: Vehicle[];
+  vehicle: Vehicle[];
 }

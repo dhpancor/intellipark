@@ -1,5 +1,7 @@
-import { getRepository, ObjectType } from 'typeorm';
+import { getRepository, ObjectType, QueryFailedError } from 'typeorm';
 import { Request, Response } from 'express';
+import { FindRelationsNotFoundError } from 'typeorm/error/FindRelationsNotFoundError';
+import { JsonResponse } from './utils/JsonResponse';
 
 export class BaseCRUD {
   private readonly entityClass;
@@ -10,24 +12,70 @@ export class BaseCRUD {
 
   all = async (request: Request, response: Response) => {
     const repository = getRepository(this.entityClass);
-    const data = await repository.find();
-    return response.send(data);
+    let data = null;
+    try {
+      data = await repository.find({ relations: this.eagerLoading(request) });
+    } catch (e) {
+      if (e instanceof FindRelationsNotFoundError) {
+        return response.send(new JsonResponse('Invalid eager loading parameter.', false));
+      } else {
+        return response.send(new JsonResponse('Fatal error. Try again later.', false));
+      }
+    }
+    return response.send(new JsonResponse(data));
   }
 
   one = async (request: Request, response: Response) => {
     const repository = getRepository(this.entityClass);
-    const data = await repository.findOne(request.params.id);
-    return response.send(data);
+    let data = null;
+    try {
+      data = await repository.findOne(request.params.id, { relations: this.eagerLoading(request) });
+    } catch (e) {
+      if (e instanceof FindRelationsNotFoundError) {
+        return response.send(new JsonResponse('Invalid eager loading parameter.', false));
+      } else {
+        return response.send(new JsonResponse('Fatal error. Try again later.', false));
+      }
+    }
+    return response.send(new JsonResponse(data));
   }
 
   save = async (request: Request, response: Response) => {
     const repository = getRepository(this.entityClass);
-    return response.send(repository.save(request.body));
+    let data = null;
+    try {
+      data = await repository.save(request.body);
+    } catch (e) {
+      if (e instanceof QueryFailedError) {
+        return response.send(new JsonResponse('Values submitted were not valid.', false));
+      } else {
+        return response.send(new JsonResponse('Fatal error. Try again later.', false));
+      }
+    }
+    return response.send(new JsonResponse(data));
   }
 
   remove = async (request: Request, response: Response) => {
     const repository = getRepository(this.entityClass);
     const objectToRemove = await repository.findOne(request.params.id);
     return response.send(await repository.softRemove(objectToRemove));
+  }
+
+  eagerLoading = (request: Request): string[] => {
+    if (Object.keys(request.query).length === 0 && request.query.constructor === Object) {
+      return [];
+    } else {
+      const relations = ['vehicle', 'client', 'accesslogs'];
+
+      if ('withAll' in request.query) { return relations; } else {
+        if ('withVehicle' in request.query) { return [relations[0]]; }
+
+        if ('withUser' in request.query) { return [relations[1]]; }
+
+        if ('withAccessLog' in request.query) { return [relations[2]]; }
+      }
+
+      return [];
+    }
   }
 }

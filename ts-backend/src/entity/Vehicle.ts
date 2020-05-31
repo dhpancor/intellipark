@@ -1,7 +1,7 @@
 import {
   Entity,
   Column,
-  ManyToOne
+  ManyToOne, OneToMany, JoinColumn
 } from 'typeorm';
 import { Client } from './Client';
 import { BasicEntity } from './BasicEntity';
@@ -12,9 +12,9 @@ export class Vehicle extends BasicEntity {
   @Column({ nullable: false, unique: true })
   plate: string;
 
-  @ManyToOne(() => Client, client => client.vehicles)
+  @ManyToOne(() => Client, client => client.vehicle)
   client: Client;
 
-  @ManyToOne(() => Client, client => client.vehicles)
-  accesslogs: AccessLog[];
+  @OneToMany(() => AccessLog, accessLog => accessLog.vehicle)
+  accessLogs: AccessLog[];
 }

@@ -11,6 +11,6 @@ export class AccessLog extends BasicEntity {
   @Column({ nullable: false })
   plate: string;
 
-  @ManyToOne(() => Vehicle, vehicle => vehicle.accesslogs)
+  @ManyToOne(() => Vehicle, vehicle => vehicle.accessLogs)
   vehicle: Vehicle;
 }

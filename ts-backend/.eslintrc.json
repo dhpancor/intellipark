@@ -24,6 +24,7 @@
     "rules": {
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "semi": [2, "always"],
-        "no-unused-vars": [2, {"vars": "all", "args": "none"}]
+        "no-unused-vars": [2, {"vars": "all", "args": "none"}],
+        "no-useless-constructor": "off"
     }
 }
