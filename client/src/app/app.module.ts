@@ -20,7 +20,7 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-import {NbAuthModule, NbDummyAuthStrategy} from '@nebular/auth';
+import {NbAuthJWTToken, NbAuthModule, NbPasswordAuthStrategy} from '@nebular/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,9 +43,13 @@ import {NbAuthModule, NbDummyAuthStrategy} from '@nebular/auth';
     }),
     CoreModule.forRoot(),
     NbAuthModule.forRoot({
-      strategies: [NbDummyAuthStrategy.setup({
+      strategies: [NbPasswordAuthStrategy.setup({
         name: 'email',
-        alwaysFail: false,
+        baseEndpoint: '/api/v1/auth/',
+        token: {
+          class: NbAuthJWTToken,
+          key: 'token'
+        }
       })],
     }),
     NbToastrModule.forRoot(),

@@ -9,7 +9,7 @@ export class AuthController {
     const repository = getRepository(User);
     try {
       const user = await repository.findOneOrFail({ email: request.body.email, password: request.body.password });
-      const token = jwt.sign(String(user.id), 'test123');
+      const token = jwt.sign({ id: user.id }, 'test123', { expiresIn: '30d' });
       return response.send({ token });
     } catch (e) {
       return response.status(401).send(new JsonResponse('Credentials not valid', false));
