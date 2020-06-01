@@ -1,18 +1,19 @@
+/* eslint-disable camelcase */
 import {
   Entity,
   Column,
-  OneToMany, JoinColumn
+  OneToMany
 } from 'typeorm';
 import { Vehicle } from './Vehicle';
 import { BasicEntity } from './BasicEntity';
 
 @Entity()
 export class Client extends BasicEntity {
-  @Column({ name: 'first_name', nullable: false })
-  firstName: string;
+  @Column({ nullable: false })
+  first_name: string;
 
-  @Column({ name: 'last_name', nullable: false })
-  lastName: string;
+  @Column({ nullable: false })
+  last_name: string;
 
   @Column({ nullable: false, unique: true })
   email: string;

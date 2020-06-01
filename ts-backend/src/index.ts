@@ -16,7 +16,7 @@ createConnection().then(async connection => {
   app.use(helmet());
 
   // use this routes
-  app.use('/', routes);
+  app.use('/api/v1/', routes);
 
   // start express server
   app.listen(3000);

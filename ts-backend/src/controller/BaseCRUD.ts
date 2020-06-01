@@ -6,7 +6,7 @@ import { JsonResponse } from './utils/JsonResponse';
 export class BaseCRUD {
   private readonly entityClass;
 
-  constructor (entityClass: ObjectType<never>) {
+  constructor (entityClass: ObjectType<any>) {
     this.entityClass = entityClass;
   }
 
@@ -75,7 +75,7 @@ export class BaseCRUD {
       if ('withAll' in request.query) { return relations; } else {
         if ('withVehicle' in request.query) { return [relations[0]]; }
 
-        if ('withUser' in request.query) { return [relations[1]]; }
+        if ('withClient' in request.query) { return [relations[1]]; }
 
         if ('withAccessLog' in request.query) { return [relations[2]]; }
       }

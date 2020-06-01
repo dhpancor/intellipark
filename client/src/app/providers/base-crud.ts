@@ -13,7 +13,7 @@ export class BaseCRUD<T> {
   }
 
   findOne(id: number, eagerLoading?: EagerLoadingStrategy): Observable<T> {
-    const endpointSuffix = `/${id}` + eagerLoading !== undefined ? this.getEagerLoadingEndpoint(eagerLoading) : '';
+    const endpointSuffix = `/${id}` + (eagerLoading !== undefined ? this.getEagerLoadingEndpoint(eagerLoading) : '');
     return this.httpClient.get<T>(this.baseUrl + this.specificEndpoint + endpointSuffix)
       .pipe(map(result => result['data']));
   }
