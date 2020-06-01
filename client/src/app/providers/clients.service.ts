@@ -8,6 +8,6 @@ import {Client} from "../models/client";
 })
 export class ClientsService extends BaseCRUD<Client> {
   constructor(httpClient: HttpClient) {
-    super(httpClient, "/users");
+    super(httpClient, "/clients");
   }
 }

@@ -11,5 +11,5 @@ export interface Client {
   createdAt?: Date | null;
   updatedAt?: Date | null;
   deletedAt?: Date | null;
-  Vehicles?: Vehicle[];
+  vehicle?: Vehicle[];
 }

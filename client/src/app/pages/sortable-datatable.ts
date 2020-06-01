@@ -25,7 +25,6 @@ export class SortableDatatable<T> {
     this.crudService.findAll(eagerLoading).subscribe(r => {
       this.temp = r;
       this.rows = r;
-      console.log(r[0]);
     });
   }
 

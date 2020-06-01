@@ -13,10 +13,10 @@ export class VehicleListComponent extends SortableDatatable<Vehicle> implements 
   columns = [
     {prop: 'id', name: '#'},
     {prop: 'plate', name: 'Plate number'},
-    {prop: 'User.dni', name: 'Owner DNI'}];
+    {prop: 'client.dni', name: 'Owner DNI'}];
 
   constructor(public vehiclesService: VehiclesService, public nbToastrService: NbToastrService) {
-    super(vehiclesService, nbToastrService, EagerLoadingStrategy.USER);
+    super(vehiclesService, nbToastrService, EagerLoadingStrategy.CLIENT);
   }
 
   ngOnInit() {
