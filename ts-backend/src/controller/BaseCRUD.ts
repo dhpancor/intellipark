@@ -57,8 +57,13 @@ export class BaseCRUD {
 
   remove = async (request: Request, response: Response) => {
     const repository = getRepository(this.entityClass);
-    const objectToRemove = await repository.findOne(request.params.id);
-    return response.send(await repository.softRemove(objectToRemove));
+    let data = null;
+    try {
+      data = await repository.softDelete({ id: request.params.id });
+    } catch (e) {
+      return response.send(new JsonResponse('Fatal error. Try again later.', false));
+    }
+    return response.send(new JsonResponse(data.raw.affectedRows, data.raw.affectedRows > 0));
   }
 
   private eagerLoading = (request: Request): string[] => {
