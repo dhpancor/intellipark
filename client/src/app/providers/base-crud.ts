@@ -19,7 +19,7 @@ export class BaseCRUD<T> {
   }
 
   findAll(eagerLoading?: EagerLoadingStrategy): Observable<T[]> {
-    const endpointSuffix = eagerLoading !== undefined ? `/${this.getEagerLoadingEndpoint(eagerLoading)}` : '';
+    const endpointSuffix = (eagerLoading !== undefined ? `/${this.getEagerLoadingEndpoint(eagerLoading)}` : '');
     return this.httpClient.get<T[]>(this.baseUrl + this.specificEndpoint + endpointSuffix)
       .pipe(map(result => result['data']));
   }
