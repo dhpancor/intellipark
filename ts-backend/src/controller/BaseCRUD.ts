@@ -4,7 +4,7 @@ import { FindRelationsNotFoundError } from 'typeorm/error/FindRelationsNotFoundE
 import { JsonResponse } from './utils/JsonResponse';
 
 export class BaseCRUD {
-  private readonly entityClass;
+  protected readonly entityClass;
 
   constructor (entityClass: ObjectType<any>) {
     this.entityClass = entityClass;
@@ -70,7 +70,7 @@ export class BaseCRUD {
     if (Object.keys(request.query).length === 0 && request.query.constructor === Object) {
       return [];
     } else {
-      const relations = ['vehicle', 'client', 'accesslogs'];
+      const relations = ['vehicle', 'client', 'accessLogs'];
 
       if ('withAll' in request.query) { return relations; } else {
         if ('withVehicle' in request.query) { return [relations[0]]; }

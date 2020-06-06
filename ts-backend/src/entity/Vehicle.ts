@@ -1,7 +1,7 @@
 import {
   Entity,
   Column,
-  ManyToOne, OneToMany, JoinColumn
+  ManyToOne, OneToMany
 } from 'typeorm';
 import { Client } from './Client';
 import { BasicEntity } from './BasicEntity';
