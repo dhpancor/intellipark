@@ -18,10 +18,16 @@ export class ClientDetailComponent implements OnInit {
 
   client: Client;
   lastAccesses: AccessLog[] = [];
+  accessPerVehicle = [];
 
   ngOnInit(): void {
     this.client = this.route.snapshot.data.client;
-    this.clientService.lastAccesses(this.client.id).subscribe(r => this.lastAccesses = r);
+    this.clientService.lastAccesses(this.client.id).subscribe(result => {
+      this.lastAccesses = result;
+    });
+    this.clientService.accessPerClientVehicle(this.client.id).subscribe(result => {
+      this.accessPerVehicle = result;
+    });
   }
 
   getLocalDate(date: Date): string {

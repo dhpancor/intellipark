@@ -14,6 +14,8 @@ import {RouterModule} from "@angular/router";
 import {ClientsFormComponent} from "./clients-form/clients-form.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ClientDetailComponent} from "./client-detail/client-detail.component";
+import {ChartModule} from "angular2-chartjs";
+import {PieChartModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [ClientsListComponent, ClientsFormComponent, ClientDetailComponent],
@@ -28,7 +30,8 @@ import {ClientDetailComponent} from "./client-detail/client-detail.component";
     ReactiveFormsModule,
     NbIconModule,
     NbActionsModule,
-    NbListModule
+    NbListModule,
+    PieChartModule
   ]
 })
 export class ClientsModule {

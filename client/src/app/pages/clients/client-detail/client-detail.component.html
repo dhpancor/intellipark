@@ -39,12 +39,25 @@
             <div class="col-lg-6">{{ this.getLocalDate(access.createdAt) }}</div>
           </div>
         </nb-list-item>
+        <nb-list-item *ngIf="this.lastAccesses.length == 0">There are no records for this client.</nb-list-item>
       </nb-list>
     </nb-card>
   </div>
   <div class="col-lg-4">
-    <nb-card accent="success">
-      <nb-card-header>Chart here..</nb-card-header>
+    <nb-card accent="success" *ngIf="this.client.vehicle && this.client.vehicle.length > 0 && this.accessPerVehicle.length > 0; else NoVehicles">
+      <nb-card-header>Vehicle usage</nb-card-header>
+      <ngx-charts-pie-chart size="" scheme="picnic" [results]="this.accessPerVehicle" labels="true"></ngx-charts-pie-chart>
+    </nb-card>
+    <ng-template #NoVehicles>
+      <nb-card accent="danger">
+        <nb-card-header>Ooops! Not enough data</nb-card-header>
+        <nb-card-body>It looks like the client has no associated vehicles, never used them or they were recently added to the system.
+          <br><br>That's why we cannot show any stats related to this client. Try again later.</nb-card-body>
+      </nb-card>
+    </ng-template>
+    <nb-card accent="success" *ngIf="this.client.vehicle && this.client.vehicle.length > 0 && this.accessPerVehicle.length > 0">
+      <nb-card-header>Time spent</nb-card-header>
+      
     </nb-card>
   </div>
   <div class="col-lg-3">

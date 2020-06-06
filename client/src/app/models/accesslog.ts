@@ -5,6 +5,7 @@ export interface AccessLog {
   plate: string | null;
   vehicle?: Vehicle | null;
   createdAt?: Date | null;
+  leaveTime?: Date | null;
   updatedAt?: Date | null;
   deletedAt?: Date | null;
 }

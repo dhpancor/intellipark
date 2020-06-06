@@ -13,4 +13,7 @@ export class AccessLog extends BasicEntity {
 
   @ManyToOne(() => Vehicle, vehicle => vehicle.accessLogs)
   vehicle: Vehicle;
+
+  @Column({ nullable: true })
+  leaveTime: Date;
 }

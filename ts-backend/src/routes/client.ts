@@ -13,5 +13,6 @@ router.delete('/:id', clientsController.remove);
 
 // Specific methods
 router.get('/:id/accesses', clientsController.getLastAccesses);
+router.get('/:id/stats/accessPerVehicle', clientsController.getAccessesPerVehicle);
 
 export default router;

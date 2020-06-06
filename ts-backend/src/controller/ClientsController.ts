@@ -31,4 +31,24 @@ export class ClientsController extends BaseCRUD {
     }
     return response.send(new JsonResponse(data));
   }
+
+  getAccessesPerVehicle = async (request: Request, response: Response) => {
+    let data = null;
+    try {
+      data = await getRepository(AccessLog)
+        .createQueryBuilder('accesslog')
+        .innerJoin('accesslog.vehicle', 'vehicle')
+        .groupBy('vehicle.plate')
+        .select('vehicle.plate', 'name')
+        .addSelect('COUNT(*)', 'value')
+        .innerJoin('vehicle.client', 'client')
+        .where('client.id = :clientId')
+        .setParameters({ clientId: request.params.id })
+        .getRawMany();
+    } catch (e) {
+      console.log(e);
+      return response.send(new JsonResponse('Fatal error. Try again later.', false));
+    }
+    return response.send(new JsonResponse(data));
+  }
 }
