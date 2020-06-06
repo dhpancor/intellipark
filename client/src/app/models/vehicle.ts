@@ -1,7 +1,7 @@
 import {Client} from "./client";
 
 export interface Vehicle {
-  id?: string;
+  id?: number;
   plate: string;
   createdAt?: Date | null;
   updatedAt?: Date | null;

@@ -2,8 +2,9 @@ import {Component, OnInit} from "@angular/core";
 import {ClientsService} from "../../../providers/clients.service";
 import {Client} from "../../../models/client";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NbToastrService} from "@nebular/theme";
+import {AccessLog} from "../../../models/accesslog";
+import * as moment from 'moment';
 
 @Component({
   selector: 'ngx-client-detail',
@@ -16,8 +17,14 @@ export class ClientDetailComponent implements OnInit {
   }
 
   client: Client;
+  lastAccesses: AccessLog[] = [];
 
   ngOnInit(): void {
     this.client = this.route.snapshot.data.client;
+    this.clientService.lastAccesses(this.client.id).subscribe(r => this.lastAccesses = r);
+  }
+
+  getLocalDate(date: Date): string {
+    return moment(date).format('LLL');
   }
 }

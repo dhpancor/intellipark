@@ -7,9 +7,9 @@ import {EagerLoadingStrategy} from "./types/eager-loading-strategy.enum";
 @Injectable()
 export class BaseCRUD<T> {
 
-  baseUrl = "http://localhost:4200/api/v1";
+  protected baseUrl = "http://localhost:4200/api/v1";
 
-  constructor(private httpClient: HttpClient, private specificEndpoint: string | string[]) {
+  constructor(protected httpClient: HttpClient, protected specificEndpoint: string | string[]) {
   }
 
   findOne(id: number, eagerLoading?: EagerLoadingStrategy): Observable<T> {

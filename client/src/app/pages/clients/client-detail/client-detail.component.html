@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-5">
     <nb-card accent="primary">
-      <nb-card-header>Viewing the profile of user #{{ client.id }}</nb-card-header>
+      <nb-card-header>Viewing the profile of user #{{ client.id }}<button class="float-right" size="" nbButton><nb-icon icon="edit-2-outline"></nb-icon></button></nb-card-header>
       <nb-card-body>
         <div class="row">
           <div class="col-lg-4"><b>First Name</b></div>
@@ -28,37 +28,22 @@
           <div class="col-lg-8">{{ client.comments }}</div>
         </div>
       </nb-card-body>
-      <!--<nb-card-body>
-        <p><b>First Name:</b> {{ client.first_name }}</p>
-        <p><b>Last Name:</b> {{ client.last_name }}</p>
-        <p><b>Email Address:</b> <a href="mailto:{{ client.email }}"> {{ client.email }}</a></p>
-        <p><b>Gender:</b> {{ client.gender }}</p>
-        <p><b>DNI:</b> {{ client.dni }}</p>
-        <p *ngIf="client.comments && client.comments != ''"><b>Additional data:</b> {{ client.comments }}</p>
-      </nb-card-body>-->
     </nb-card>
-    <nb-card>
-      <nb-card-header>Last access</nb-card-header>
-      <nb-card-body>
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Date</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <th>2020-12-02 02:30</th>
-          </tr>
-          </tbody>
-        </table>
-      </nb-card-body>
+    <nb-card accent="warning">
+      <nb-card-header>Last 10 accesses</nb-card-header>
+      <nb-list>
+        <nb-list-item *ngFor="let access of this.lastAccesses">
+          <div class="row">
+            <div class="col-lg-2">#{{ access.id }}</div>
+            <div class="col-lg-4">{{ access.plate ? access.plate : access.vehicle.plate }}</div>
+            <div class="col-lg-6">{{ this.getLocalDate(access.createdAt) }}</div>
+          </div>
+        </nb-list-item>
+      </nb-list>
     </nb-card>
   </div>
   <div class="col-lg-4">
-    <nb-card>
+    <nb-card accent="success">
       <nb-card-header>Chart here..</nb-card-header>
     </nb-card>
   </div>
