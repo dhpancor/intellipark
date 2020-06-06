@@ -3,6 +3,7 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/rou
 import {Client} from "../models/client";
 import {Observable} from "rxjs";
 import {ClientsService} from "../providers/clients.service";
+import {EagerLoadingStrategy} from "../providers/types/eager-loading-strategy.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +21,12 @@ export class SingleClientResolver implements Resolve<Client> {
         email: "",
         first_name: "",
         gender: "",
-        last_name: ""
+        last_name: "",
+        vehicle: []
       };
       return client;
     } else {
-      return this.clientsService.findOne(route.params.id);
+      return this.clientsService.findOne(route.params.id, EagerLoadingStrategy.VEHICLES);
     }
   }
 }

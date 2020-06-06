@@ -6,16 +6,17 @@ import {
   NbButtonModule,
   NbCardModule,
   NbIconModule,
-  NbInputModule,
+  NbInputModule, NbListModule,
   NbSelectModule
 } from "@nebular/theme";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {RouterModule} from "@angular/router";
 import {ClientsFormComponent} from "./clients-form/clients-form.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {ClientDetailComponent} from "./client-detail/client-detail.component";
 
 @NgModule({
-  declarations: [ClientsListComponent, ClientsFormComponent],
+  declarations: [ClientsListComponent, ClientsFormComponent, ClientDetailComponent],
   imports: [
     CommonModule,
     NbCardModule,
@@ -26,7 +27,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     RouterModule,
     ReactiveFormsModule,
     NbIconModule,
-    NbActionsModule
+    NbActionsModule,
+    NbListModule
   ]
 })
 export class ClientsModule {

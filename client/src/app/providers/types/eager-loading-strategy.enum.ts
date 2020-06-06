@@ -1,6 +1,6 @@
 export enum EagerLoadingStrategy {
   'ALL' = 'All',
-  'VEHICLES' = 'Vehicles',
+  'VEHICLES' = 'Vehicle',
   'CLIENT' = 'Client',
   'ACCESS_LOG' = 'AccessLog'
 }

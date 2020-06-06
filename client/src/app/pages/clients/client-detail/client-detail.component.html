@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-lg-5">
+    <nb-card accent="primary">
+      <nb-card-header>Viewing the profile of user #{{ client.id }}</nb-card-header>
+      <nb-card-body>
+        <div class="row">
+          <div class="col-lg-4"><b>First Name</b></div>
+          <div class="col-lg-8">{{ client.first_name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4"><b>Last Name</b></div>
+          <div class="col-lg-8">{{ client.last_name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4"><b>DNI</b></div>
+          <div class="col-lg-8">{{ client.dni }}</div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4"><b>Email Address</b></div>
+          <div class="col-lg-8"><a href="mailto:{{ client.email }}"> {{ client.email }}</a></div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4"><b>Gender</b></div>
+          <div class="col-lg-8">{{ client.gender }}</div>
+        </div>
+        <div class="row" *ngIf="client.comments && client.comments != ''">
+          <div class="col-lg-4"><b>Additional data</b></div>
+          <div class="col-lg-8">{{ client.comments }}</div>
+        </div>
+      </nb-card-body>
+      <!--<nb-card-body>
+        <p><b>First Name:</b> {{ client.first_name }}</p>
+        <p><b>Last Name:</b> {{ client.last_name }}</p>
+        <p><b>Email Address:</b> <a href="mailto:{{ client.email }}"> {{ client.email }}</a></p>
+        <p><b>Gender:</b> {{ client.gender }}</p>
+        <p><b>DNI:</b> {{ client.dni }}</p>
+        <p *ngIf="client.comments && client.comments != ''"><b>Additional data:</b> {{ client.comments }}</p>
+      </nb-card-body>-->
+    </nb-card>
+    <nb-card>
+      <nb-card-header>Last access</nb-card-header>
+      <nb-card-body>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <th>2020-12-02 02:30</th>
+          </tr>
+          </tbody>
+        </table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-lg-4">
+    <nb-card>
+      <nb-card-header>Chart here..</nb-card-header>
+    </nb-card>
+  </div>
+  <div class="col-lg-3">
+    <nb-card accent="info">
+      <nb-card-header>Vehicles <button class="float-right" size="" nbButton><nb-icon icon="plus-outline"></nb-icon></button></nb-card-header>
+      <nb-list>
+        <nb-list-item *ngFor="let vehicle of client.vehicle">
+          {{ vehicle.plate }}
+          <nb-icon class="float-right" icon="trash-2-outline"></nb-icon>
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+</div>
