@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-5">
     <nb-card accent="primary">
-      <nb-card-header>Viewing the profile of user #{{ client.id }}<button class="float-right" size="" nbButton><nb-icon icon="edit-2-outline"></nb-icon></button></nb-card-header>
+      <nb-card-header>Viewing the profile of user #{{ client.id }}<button class="float-right" size="" nbButton><nb-icon [routerLink]="['/app/clients', client.id]" icon="edit-2-outline"></nb-icon></button></nb-card-header>
       <nb-card-body>
         <div class="row">
           <div class="col-lg-4"><b>First Name</b></div>
@@ -46,7 +46,7 @@
   <div class="col-lg-4">
     <nb-card accent="success" *ngIf="this.client.vehicle && this.client.vehicle.length > 0 && this.accessPerVehicle.length > 0; else NoVehicles">
       <nb-card-header>Vehicle usage</nb-card-header>
-      <ngx-charts-pie-chart size="" scheme="picnic" [results]="this.accessPerVehicle" labels="true"></ngx-charts-pie-chart>
+      <ngx-charts-pie-chart scheme="picnic" [results]="this.accessPerVehicle" labels="true"></ngx-charts-pie-chart>
     </nb-card>
     <ng-template #NoVehicles>
       <nb-card accent="danger">
@@ -56,8 +56,17 @@
       </nb-card>
     </ng-template>
     <nb-card accent="success" *ngIf="this.client.vehicle && this.client.vehicle.length > 0 && this.accessPerVehicle.length > 0">
-      <nb-card-header>Time spent</nb-card-header>
-      
+      <nb-card-header>Time spent on the last 7 visits</nb-card-header>
+      <ngx-charts-bar-vertical
+        scheme="picnic"
+        [results]="this.lastTenVisitsTimeSpent"
+        xAxisLabel="Day"
+        yAxisLabel="Minutes spent"
+        showXAxisLabel="true"
+        showYAxisLabel="true"
+        xAxis="true"
+        yAxis="true"
+      ></ngx-charts-bar-vertical>
     </nb-card>
   </div>
   <div class="col-lg-3">
@@ -66,7 +75,7 @@
       <nb-list>
         <nb-list-item *ngFor="let vehicle of client.vehicle">
           {{ vehicle.plate }}
-          <nb-icon class="float-right" icon="trash-2-outline"></nb-icon>
+          <button nbButton size="" ghost class="float-right"><nb-icon (click)="this.deleteVehicle(vehicle.id)" icon="trash-2-outline"></nb-icon></button>
         </nb-list-item>
       </nb-list>
     </nb-card>

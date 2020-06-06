@@ -23,4 +23,9 @@ export class ClientsService extends BaseCRUD<Client> {
     return this.httpClient.get(this.baseUrl + this.specificEndpoint + `/${id}/stats/accessPerVehicle`)
       .pipe(map(result => result['data']));
   }
+
+  lastTenVisitsTimeSpent(id: number) {
+    return this.httpClient.get(this.baseUrl + this.specificEndpoint + `/${id}/stats/lastTenVisitsTimeSpent`)
+      .pipe(map(result => result['data']));
+  }
 }

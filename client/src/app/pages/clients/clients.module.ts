@@ -15,7 +15,7 @@ import {ClientsFormComponent} from "./clients-form/clients-form.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ClientDetailComponent} from "./client-detail/client-detail.component";
 import {ChartModule} from "angular2-chartjs";
-import {PieChartModule} from "@swimlane/ngx-charts";
+import {BarChartModule, PieChartModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [ClientsListComponent, ClientsFormComponent, ClientDetailComponent],
@@ -31,7 +31,8 @@ import {PieChartModule} from "@swimlane/ngx-charts";
     NbIconModule,
     NbActionsModule,
     NbListModule,
-    PieChartModule
+    PieChartModule,
+    BarChartModule
   ]
 })
 export class ClientsModule {

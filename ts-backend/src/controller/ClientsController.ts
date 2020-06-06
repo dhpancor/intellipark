@@ -51,4 +51,26 @@ export class ClientsController extends BaseCRUD {
     }
     return response.send(new JsonResponse(data));
   }
+
+  lastTenVisitsTimeSpent = async (request: Request, response: Response) => {
+    let data = null;
+    try {
+      data = await getRepository(AccessLog)
+        .createQueryBuilder('accesslog')
+        .innerJoin('accesslog.vehicle', 'vehicle')
+        .innerJoin('vehicle.client', 'client')
+        .select('CEIL(SUM(TIME_TO_SEC(accesslog.leaveTime) - TIME_TO_SEC(accesslog.createdAt)) / 60)', 'value')
+        .addSelect('DATE(accesslog.leaveTime)', 'name')
+        .where('client.id = :clientId')
+        .groupBy('date(accesslog.leaveTime)')
+        .orderBy('date(accesslog.leaveTime)', 'DESC')
+        .setParameters({ clientId: request.params.id })
+        .take(6)
+        .getRawMany();
+    } catch (e) {
+      console.log(e);
+      return response.send(new JsonResponse('Fatal error. Try again later.', false));
+    }
+    return response.send(new JsonResponse(data));
+  }
 }
