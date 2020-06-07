@@ -6,7 +6,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {CoreModule} from './@core/core.module';
 import {ThemeModule} from './@theme/theme.module';
 import {AppComponent} from './app.component';
@@ -20,10 +20,24 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-import {NbAuthJWTToken, NbAuthModule, NbPasswordAuthStrategy} from '@nebular/auth';
+import {
+  NB_AUTH_TOKEN_INTERCEPTOR_FILTER,
+  NbAuthJWTInterceptor,
+  NbAuthJWTToken,
+  NbAuthModule,
+  NbPasswordAuthStrategy
+} from '@nebular/auth';
 
 @NgModule({
   declarations: [AppComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true },
+    {
+      provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: () => {
+        return false;
+      }
+    },
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
