@@ -9,6 +9,6 @@ export class User extends BasicEntity {
     @Column()
     name: string;
 
-    @Column()
+    @Column({ select: false })
     password: string;
 }
