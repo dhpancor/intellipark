@@ -15,6 +15,8 @@ export class Vehicle extends BasicEntity {
   @ManyToOne(() => Client, client => client.vehicle)
   client: Client;
 
-  @OneToMany(() => AccessLog, accessLog => accessLog.vehicle)
+  @OneToMany(() => AccessLog, accessLog => accessLog.vehicle, {
+    onDelete: 'CASCADE'
+  })
   accessLogs: AccessLog[];
 }

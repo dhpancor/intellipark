@@ -9,7 +9,4 @@ export abstract class BasicEntity {
 
   @UpdateDateColumn()
   updatedAt: string;
-
-  @DeleteDateColumn()
-  deletedAt: string;
 }

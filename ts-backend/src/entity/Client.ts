@@ -27,6 +27,8 @@ export class Client extends BasicEntity {
   @Column({ nullable: true })
   comments: string;
 
-  @OneToMany(() => Vehicle, vehicle => vehicle.client)
+  @OneToMany(() => Vehicle, vehicle => vehicle.client, {
+    onDelete: 'CASCADE'
+  })
   vehicle: Vehicle[];
 }

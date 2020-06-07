@@ -59,7 +59,7 @@ export class BaseCRUD {
     const repository = getRepository(this.entityClass);
     let data = null;
     try {
-      data = await repository.softDelete({ id: request.params.id });
+      data = await repository.delete({ id: request.params.id });
     } catch (e) {
       return response.send(new JsonResponse('Fatal error. Try again later.', false));
     }
