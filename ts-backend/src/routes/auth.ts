@@ -5,5 +5,6 @@ const router = Router();
 
 // Specific endpoints
 router.post('/login', AuthController.login);
+router.delete('/logout', AuthController.logout);
 
 export default router;

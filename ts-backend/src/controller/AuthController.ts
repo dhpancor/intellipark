@@ -15,4 +15,8 @@ export class AuthController {
       return response.status(401).send(new JsonResponse('Credentials not valid', false));
     }
   };
+
+  static logout = async (request: Request, response: Response) => {
+    return response.send(new JsonResponse({}, true));
+  };
 }
