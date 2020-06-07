@@ -38,11 +38,6 @@ const routes: Routes = [{
       component: VehicleListComponent
     },
     {
-      path: 'vehicles/:id',
-      component: VehiclesFormComponent,
-      resolve: {vehicle: SingleVehicleResolver}
-    },
-    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
