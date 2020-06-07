@@ -1,7 +1,9 @@
 import { Router } from 'express';
 import { ClientsController } from '../controller/ClientsController';
+import * as passport from 'passport';
 
 const router = Router();
+router.use(passport.authenticate('jwt', { session: false }));
 const clientsController = new ClientsController();
 
 // CRUD methods
