@@ -36,11 +36,24 @@
           rowHeight="auto"
           reorderable="true"
         >
-          <ngx-datatable-column *ngFor="let column of columns" [prop]="column.prop"
+          <ngx-datatable-column name="#" prop="id">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              {{ row.id }}
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="DNI" prop="dni">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <a [routerLink]="['/app/profile', row.id]">{{ row.dni }}</a>
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column *ngFor="let column of iterableColumns" [prop]="column.prop"
                                 [name]="column.name"></ngx-datatable-column>
           <ngx-datatable-column name="Actions" prop="name">
             <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
               <nb-actions>
+                <nb-action icon="maximize-outline" [routerLink]="['/app/profile', row.id]"></nb-action>
                 <nb-action icon="edit-outline" [routerLink]="[row.id]"></nb-action>
                 <nb-action icon="trash-2-outline" (click)="deleteListItem(row)"></nb-action>
               </nb-actions>

@@ -17,6 +17,12 @@ export class ClientsListComponent extends SortableDatatable<Client> implements O
     {prop: 'email', name: 'Email'},
     {prop: 'gender', name: 'Gender'}];
 
+  iterableColumns = [
+    {prop: 'first_name', name: 'First Name'},
+    {prop: 'last_name', name: 'Last Name'},
+    {prop: 'email', name: 'Email'},
+    {prop: 'gender', name: 'Gender'}];
+
   constructor(public clientsService: ClientsService, public nbToastrService: NbToastrService) {
     super(clientsService, nbToastrService);
   }
