@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-5">
     <nb-card accent="primary">
-      <nb-card-header>Viewing the profile of user #{{ client.id }}<button class="float-right" size="" nbButton><nb-icon [routerLink]="['/app/clients', client.id]" icon="edit-2-outline"></nb-icon></button></nb-card-header>
+      <nb-card-header>Client #{{ client.id }}<button class="float-right" size="" nbButton><nb-icon [routerLink]="['/app/clients', client.id]" icon="edit-2-outline"></nb-icon></button></nb-card-header>
       <nb-card-body>
         <div class="row">
           <div class="col-lg-4"><b>First Name</b></div>
@@ -77,6 +77,7 @@
           {{ vehicle.plate }}
           <button nbButton size="" ghost class="float-right"><nb-icon (click)="this.deleteVehicle(vehicle.id)" icon="trash-2-outline"></nb-icon></button>
         </nb-list-item>
+        <nb-list-item *ngIf="this.client.vehicle.length === 0">This client has no associated vehicles.</nb-list-item>
       </nb-list>
     </nb-card>
   </div>

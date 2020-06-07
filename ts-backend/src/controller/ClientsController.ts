@@ -65,7 +65,7 @@ export class ClientsController extends BaseCRUD {
         .groupBy('date(accesslog.leaveTime)')
         .orderBy('date(accesslog.leaveTime)', 'DESC')
         .setParameters({ clientId: request.params.id })
-        .take(6)
+        .take(7)
         .getRawMany();
     } catch (e) {
       console.log(e);
