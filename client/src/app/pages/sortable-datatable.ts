@@ -15,6 +15,7 @@ export class SortableDatatable<T> {
   temp: T[] = [];
   rows: T[] = [];
   columns: DatatableColumn[] = null;
+  loadingIndicator = true;
 
   @ViewChild(DatatableComponent, {static: false}) table: DatatableComponent;
   @ViewChild("searchQuery", {static: false}) searchQuery: ElementRef;
@@ -23,6 +24,7 @@ export class SortableDatatable<T> {
 
   constructor(public crudService: BaseCRUD<T>, public nbToastrService: NbToastrService, public eagerLoading?: EagerLoadingStrategy) {
     this.crudService.findAll(eagerLoading).subscribe(r => {
+      this.loadingIndicator = false;
       this.temp = r;
       this.rows = r;
     });
