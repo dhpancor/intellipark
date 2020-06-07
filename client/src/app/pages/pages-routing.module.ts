@@ -34,13 +34,13 @@ const routes: Routes = [{
       resolve: {client: SingleClientResolver}
     },
     {
-      path: 'vehicles',
-      component: VehicleListComponent
+      path: 'profile/:id/create_vehicle',
+      component: VehiclesFormComponent,
+      resolve: {client: SingleClientResolver}
     },
     {
-      path: 'vehicles/:id',
-      component: VehiclesFormComponent,
-      resolve: {vehicle: SingleVehicleResolver}
+      path: 'vehicles',
+      component: VehicleListComponent
     },
     {
       path: '',

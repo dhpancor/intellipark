@@ -6,5 +6,5 @@ export interface Vehicle {
   createdAt?: Date | null;
   updatedAt?: Date | null;
   deletedAt?: Date | null;
-  client?: Client;
+  client?: Client | number;
 }

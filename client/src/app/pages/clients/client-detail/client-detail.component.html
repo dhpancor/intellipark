@@ -71,7 +71,7 @@
   </div>
   <div class="col-lg-3">
     <nb-card accent="info">
-      <nb-card-header>Vehicles <button class="float-right" size="" nbButton><nb-icon icon="plus-outline"></nb-icon></button></nb-card-header>
+      <nb-card-header>Vehicles <button class="float-right" size="" [routerLink]="['create_vehicle']"  nbButton><nb-icon icon="plus-outline"></nb-icon></button></nb-card-header>
       <nb-list>
         <nb-list-item *ngFor="let vehicle of client.vehicle">
           {{ vehicle.plate }}

@@ -1,82 +1,21 @@
 <div class="row">
   <div class="col-md-12">
     <nb-card>
-      <nb-card-header><span>{{ this.route.snapshot.params.id !== 'new' ? 'Edit' : 'Create' }} a user</span>
+      <nb-card-header><span>Add a vehicle to the client</span>
       </nb-card-header>
       <nb-card-body>
         <form [formGroup]="this.form" (ngSubmit)="onFormSubmit()">
 
           <div class="form-group row">
-            <label for="dni" class="col-sm-2 col-form-label">DNI or equivalent</label>
+            <label for="plate" class="col-sm-2 col-form-label">Plate</label>
             <div class="col-sm-10">
               <input nbInput fullWidth
-                     [status]="this.form.get('dni').errors && this.form.get('dni').touched ? 'danger' : ''"
-                     formControlName="dni" class="form-control" id="dni" type="text" aria-describedby="dniHelp"
-                     placeholder="Enter the DNI">
-              <small [hidden]="!(this.form.get('dni').errors && this.form.get('dni').touched)" class="text-danger">Enter
-                a valid DNI please.</small>
-              <small id="dniHelp" class="form-text text-muted">DNI, NIF, NIE or the identification number for this
-                client.</small>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
-            <div class="col-sm-10">
-              <input nbInput fullWidth
-                     [status]="this.form.get('first_name').errors && this.form.get('first_name').touched ? 'danger' : ''"
-                     formControlName="first_name" class="form-control" id="first_name" type="text"
-                     placeholder="Enter the first name">
-              <small [hidden]="!(this.form.get('first_name').errors && this.form.get('first_name').touched)"
-                     class="text-danger">Enter a valid first name please.</small>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
-            <div class="col-sm-10">
-              <input nbInput fullWidth
-                     [status]="this.form.get('last_name').errors && this.form.get('last_name').touched ? 'danger' : ''"
-                     formControlName="last_name" class="form-control" id="last_name" type="text"
-                     placeholder="Enter the last name">
-              <small [hidden]="!(this.form.get('last_name').errors && this.form.get('last_name').touched)"
-                     class="text-danger">Enter a valid last name please.</small>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="email" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-              <input nbInput fullWidth
-                     [status]="this.form.get('email').errors && this.form.get('email').touched ? 'danger' : ''"
-                     formControlName="email" class="form-control" id="email" type="email"
-                     placeholder="example@domain.com">
-              <small [hidden]="!(this.form.get('email').errors && this.form.get('email').touched)" class="text-danger">Enter
-                a valid email please.</small>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="gender" class="col-sm-2 col-form-label">Gender</label>
-            <div class="col-sm-10">
-              <nb-select id='gender' fullWidth
-                         [status]="this.form.get('gender').errors && this.form.get('gender').dirty ? 'danger' : ''"
-                         formControlName="gender" placeholder="Gender">
-                <nb-option [value]="'Male'">Male</nb-option>
-                <nb-option [value]="'Female'">Female</nb-option>
-                <nb-option [value]="'Other'">Other</nb-option>
-              </nb-select>
-              <small [hidden]="!(this.form.get('gender').errors && this.form.get('gender').dirty)" class="text-danger">Enter
-                a valid gender please.</small>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="comments" class="col-sm-2 col-form-label">Additional data</label>
-            <div class="col-sm-10">
-              <textarea nbInput fullWidth formControlName="comments" placeholder="There is no additional data"
-                        class="form-control" id="comments" aria-describedby="commentsHelp"></textarea>
-              <small id="commentsHelp" class="form-text text-muted">You can leave this field blank.</small>
+                     [status]="this.form.get('plate').errors && this.form.get('plate').touched ? 'danger' : ''"
+                     formControlName="plate" class="form-control" id="plate" type="text" aria-describedby="plateHelp"
+                     placeholder="Enter the plate"
+                     oninput="this.value = this.value.toUpperCase().replace(' ', '')">
+              <small [hidden]="!(this.form.get('plate').errors && this.form.get('plate').touched)" class="text-danger">Please enter a valid vehicle plate.</small>
+              <small id="plateHelp" class="form-text text-muted">The plate of the vehicle. Keep in mind that more than 1 client can have the same vehicle.</small>
             </div>
           </div>
 

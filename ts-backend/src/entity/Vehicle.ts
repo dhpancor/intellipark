@@ -9,7 +9,7 @@ import { AccessLog } from './AccessLog';
 
 @Entity()
 export class Vehicle extends BasicEntity {
-  @Column({ nullable: false, unique: true })
+  @Column({ nullable: false })
   plate: string;
 
   @ManyToOne(() => Client, client => client.vehicle)
