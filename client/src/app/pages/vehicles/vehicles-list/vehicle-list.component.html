@@ -40,7 +40,8 @@
                                 [name]="column.name"></ngx-datatable-column>
           <ngx-datatable-column name="Actions" prop="name">
             <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
-              <nb-actions fullWidth>
+              <nb-actions>
+                <nb-action icon="edit-outline" [routerLink]="[row.id]"></nb-action>
                 <nb-action icon="trash-2-outline" (click)="deleteListItem(row)"></nb-action>
               </nb-actions>
             </ng-template>
