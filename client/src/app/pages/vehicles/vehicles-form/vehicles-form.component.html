@@ -15,7 +15,7 @@
                      placeholder="Enter the plate"
                      oninput="this.value = this.value.toUpperCase().replace(' ', '')">
               <small [hidden]="!(this.form.get('plate').errors && this.form.get('plate').touched)" class="text-danger">Please enter a valid vehicle plate.</small>
-              <small id="plateHelp" class="form-text text-muted">The plate of the vehicle. Keep in mind that more than 1 client can have the same vehicle.</small>
+              <small id="plateHelp" class="form-text text-muted">The plate of the vehicle. The vehicle can only be owned once. If another client is claiming that the vehicle is theirs, you should ask for the documentation of the vehicle to check it and remove it from the previous client.</small>
             </div>
           </div>
 

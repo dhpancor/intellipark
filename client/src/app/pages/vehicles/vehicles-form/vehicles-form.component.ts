@@ -46,6 +46,6 @@ export class VehiclesFormComponent implements OnInit {
   }
 
   operationError(): void {
-    this.nbToastrService.show("There was an error. Try again please.", "Ooops!", {status: 'danger'});
+    this.nbToastrService.show("There was an error. Probably another client has registered this vehicle.", "Ooops!", {status: 'danger'});
   }
 }

@@ -26,7 +26,7 @@ export class BaseCRUD<T> {
 
   create(object: T): Observable<T> {
     return this.httpClient.post<T>(this.baseUrl + this.specificEndpoint, object)
-      .pipe(map(result => result['data']));
+      .pipe(map(result => result['success'] ? result['data'] : null));
   }
 
   update(object: T): Observable<T> {
