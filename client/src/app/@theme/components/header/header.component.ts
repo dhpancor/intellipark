@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
 
-import {UserData} from '../../../@core/data/users';
-import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {User} from "../../../models/user";
+import {UsersService} from "../../../providers/users.service";
 
 @Component({
   selector: 'ngx-header',
@@ -13,20 +13,17 @@ import {Subject} from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
-  userPictureOnly: boolean = false;
-  user: any;
+  user: User = {name: 'Loading...'};
 
   userMenu = [{ title: 'Log out', link: '/auth/logout' } ];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserData) {
+              private usersService: UsersService) {
   }
 
   ngOnInit() {
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
+    this.usersService.whoAmI().subscribe(r => this.user = r);
   }
 
   ngOnDestroy() {

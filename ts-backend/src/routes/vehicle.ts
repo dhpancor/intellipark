@@ -7,6 +7,7 @@ const router = Router();
 router.use(passport.authenticate('jwt', { session: false }));
 const vehiclesController = new BaseCRUD(Vehicle);
 
+// CRUD endpoints
 router.get('/', vehiclesController.all);
 router.get('/:id', vehiclesController.one);
 router.post('/', vehiclesController.save);
