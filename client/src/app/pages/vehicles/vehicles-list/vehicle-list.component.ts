@@ -15,6 +15,10 @@ export class VehicleListComponent extends SortableDatatable<Vehicle> implements 
     {prop: 'plate', name: 'Plate number'},
     {prop: 'client.dni', name: 'Owner DNI'}];
 
+  iterableColumns = [
+    {prop: 'id', name: '#'},
+    {prop: 'plate', name: 'Plate number'}];
+
   constructor(public vehiclesService: VehiclesService, public nbToastrService: NbToastrService) {
     super(vehiclesService, nbToastrService, EagerLoadingStrategy.CLIENT);
   }

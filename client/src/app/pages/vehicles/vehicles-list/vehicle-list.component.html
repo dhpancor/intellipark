@@ -17,9 +17,6 @@
             [disabled]="this.currentFilter === null"
           />
         </div>
-        <div style="float: right">
-          <a [routerLink]="['new']" nbButton>CREATE</a>
-        </div>
       </nb-card-body>
     </nb-card>
     <nb-card>
@@ -37,13 +34,21 @@
           rowHeight="auto"
           reorderable="true"
         >
-          <ngx-datatable-column *ngFor="let column of columns" [prop]="column.prop"
+          <ngx-datatable-column *ngFor="let column of iterableColumns" [prop]="column.prop"
                                 [name]="column.name"></ngx-datatable-column>
+
+          <ngx-datatable-column name="Owner DNI" prop="client.dni">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <a [routerLink]="['/app/profile', row.client.id]">{{ row.client.dni }}</a>
+            </ng-template>
+          </ngx-datatable-column>
+
           <ngx-datatable-column name="Actions" prop="name">
             <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
-              <nb-actions fullWidth>
-                <nb-action icon="trash-2-outline" (click)="deleteListItem(row)"></nb-action>
-              </nb-actions>
+              <div>
+                <button nbButton ghost><nb-icon icon="maximize-outline" [routerLink]="['/app/profile', row.client.id]"></nb-icon></button>
+                <button nbButton ghost status="danger"><nb-icon icon="trash-2-outline" (click)="deleteListItem(row)"></nb-icon></button>
+              </div>
             </ng-template>
           </ngx-datatable-column>
         </ngx-datatable>

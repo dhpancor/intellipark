@@ -2,7 +2,14 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {VehicleListComponent} from "./vehicles-list/vehicle-list.component";
 import {RouterModule} from "@angular/router";
-import {NbActionsModule, NbButtonModule, NbCardModule, NbInputModule, NbSelectModule} from "@nebular/theme";
+import {
+  NbActionsModule,
+  NbButtonModule,
+  NbCardModule,
+  NbIconModule,
+  NbInputModule,
+  NbSelectModule
+} from "@nebular/theme";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
 import {VehiclesFormComponent} from "./vehicles-form/vehicles-form.component";
 import {ReactiveFormsModule} from "@angular/forms";
@@ -18,7 +25,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     NbActionsModule,
     NbInputModule,
     NbButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NbIconModule
   ]
 })
 export class VehiclesModule {
