@@ -1,11 +1,10 @@
 import { Router } from 'express';
-import { BaseCRUD } from '../controller/BaseCRUD';
-import { AccessLog } from '../entity/AccessLog';
 import * as passport from 'passport';
+import { AccessLogController } from '../controller/AccessLogController';
 
 const router = Router();
 router.use(passport.authenticate('jwt', { session: false }));
-const accessLogController = new BaseCRUD(AccessLog);
+const accessLogController = new AccessLogController();
 
 // CRUD endpoints
 router.get('/', accessLogController.all);
