@@ -23,7 +23,7 @@ export class ClientsController extends BaseCRUD {
         .where('client.id = :clientId')
         .orderBy('accesslog.id', 'DESC')
         .setParameters({ clientId: request.params.id })
-        .take(10)
+        .limit(10)
         .getMany();
     } catch (e) {
       console.log(e);
@@ -65,7 +65,7 @@ export class ClientsController extends BaseCRUD {
         .groupBy('date(accesslog.leaveTime)')
         .orderBy('date(accesslog.leaveTime)', 'DESC')
         .setParameters({ clientId: request.params.id })
-        .take(7)
+        .limit(7)
         .getRawMany();
     } catch (e) {
       console.log(e);

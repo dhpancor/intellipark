@@ -17,11 +17,11 @@ export class DummyClients1590931131580 implements MigrationInterface {
           updatedAt: `${new Date()}`
         });
 
-        let initialDate = new Date(2019, 8, 1, 9, 0, 0);
+        let initialDate = new Date(2019, 2, 1, 9, 0, 0);
 
         // Generate random access logs. From zero to 39.
         for (let j = 0; j < Math.floor(Math.random() * (40)); j++) {
-          const randomDate = this.getRandomDate(initialDate, new Date(2020, 6, 9, 18), 9, 20);
+          const randomDate = this.getRandomDate(initialDate, new Date(2020, 4, 15, 18), 9, 20);
           if (randomDate.getDate() === initialDate.getDate()) {
             continue;
           }
