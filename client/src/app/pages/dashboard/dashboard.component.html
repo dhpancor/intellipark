@@ -1,12 +1,36 @@
+<nb-card accent="info">
+  <nb-card-header>Welcome!</nb-card-header>
+  <nb-card-body>This is the dashboard of <b>IntelliPark</b>. If you need help using the product, check out the
+    documentation or contact our assistance team at <a
+      href="mailto:support@intellipark.dev">support@intellipark.dev</a>.
+  </nb-card-body>
+</nb-card>
 <div class="row">
-  <div class="col-xxl-3">
-    <nb-card accent="info">
-      <nb-card-header>Welcome!</nb-card-header>
-      <nb-card-body>This is the dashboard of <b>IntelliPark</b>. If you need help using the product, check out the
-        documentation or contact our assistance team at <a
-          href="mailto:support@intellipark.dev">support@intellipark.dev</a>.
-      </nb-card-body>
+  <div class="col-lg-4">
+    <nb-card accent="success">
+      <nb-card-header>Average minutes spent by gender</nb-card-header>
+      <ngx-charts-number-card
+        scheme="picnic"
+        cardColor="#f7f7f7"
+        [results]="this.averageTimeByGender"
+      ></ngx-charts-number-card>
     </nb-card>
-
+  </div>
+  <div class="col-lg-4">
+    <nb-card accent="success">
+      <nb-card-header>Media de clientes por hora</nb-card-header>
+      <ngx-charts-bar-vertical
+        scheme="picnic"
+        [results]="this.averageBusyHours"
+        xAxisLabel="Hour of the day"
+        yAxisLabel="Clients"
+        showXAxisLabel="true"
+        showYAxisLabel="true"
+        yScaleMin="1"
+        yScaleMax="2"
+        xAxis="true"
+        yAxis="true"
+      ></ngx-charts-bar-vertical>
+    </nb-card>
   </div>
 </div>
