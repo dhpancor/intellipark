@@ -14,7 +14,7 @@ export class BaseCRUD {
     const repository = getRepository(this.entityClass);
     let data = null;
     try {
-      data = await repository.find({ relations: this.eagerLoading(request) });
+      data = await repository.find({ relations: this.eagerLoading(request), order: { id: 'DESC' } });
     } catch (e) {
       if (e instanceof FindRelationsNotFoundError) {
         return response.send(new JsonResponse('Invalid eager loading parameter.', false));
@@ -70,7 +70,7 @@ export class BaseCRUD {
     if (Object.keys(request.query).length === 0 && request.query.constructor === Object) {
       return [];
     } else {
-      const relations = ['vehicle', 'client', 'accessLogs'];
+      const relations = ['vehicle', 'client', 'accessLogs', 'vehicle.client'];
 
       if ('withAll' in request.query) { return relations; } else {
         if ('withVehicle' in request.query) { return [relations[0]]; }
@@ -78,6 +78,8 @@ export class BaseCRUD {
         if ('withClient' in request.query) { return [relations[1]]; }
 
         if ('withAccessLog' in request.query) { return [relations[2]]; }
+
+        if ('withFullAccessDetail' in request.query) { return [relations[0], relations[3]]; }
       }
 
       return [];

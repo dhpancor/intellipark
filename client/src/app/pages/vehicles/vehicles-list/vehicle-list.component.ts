@@ -6,7 +6,7 @@ import {Vehicle} from "../../../models/vehicle";
 import {EagerLoadingStrategy} from "../../../providers/types/eager-loading-strategy.enum";
 
 @Component({
-  selector: 'ngx-clients-list',
+  selector: 'ngx-vehicle-list',
   templateUrl: './vehicle-list.component.html',
 })
 export class VehicleListComponent extends SortableDatatable<Vehicle> implements OnInit {

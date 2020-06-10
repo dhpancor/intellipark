@@ -20,6 +20,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Access History',
     icon: 'book-open-outline',
-    link: '/app/access-history',
+    link: '/app/access-logs',
   },
 ];

@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-xl-12">
+    <nb-card>
+      <nb-card-body style="display: flex; justify-content: space-between">
+        <div class="form-inline">
+          <nb-select placeholder="Search by..." (selectedChange)="updateFilter($event)" size="medium">
+            <nb-option [value]="null">Clear filter</nb-option>
+            <nb-option *ngFor="let column of this.columns" [value]="column.prop">{{ column.name }}</nb-option>
+          </nb-select>
+          <input
+            #searchQuery
+            nbInput
+            type="text"
+            style="margin-left: 10px"
+            placeholder="your criteria..."
+            (keyup)="filterResults($event)"
+            [disabled]="this.currentFilter === null"
+          />
+        </div>
+      </nb-card-body>
+    </nb-card>
+    <nb-card>
+      <nb-card-header>Access History List</nb-card-header>
+      <nb-card-body>
+        <ngx-datatable
+          #table
+          class="material striped"
+          [loadingIndicator]="this.loadingIndicator"
+          [rows]="rows"
+          [columnMode]="ColumnMode.force"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [limit]="10"
+          rowHeight="auto"
+          reorderable="true"
+        >
+          <ngx-datatable-column *ngFor="let column of iterableColumns" [prop]="column.prop"
+                                [name]="column.name"></ngx-datatable-column>
+
+          <ngx-datatable-column name="Plate number" prop="plate">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <a *ngIf="row.vehicle !== null && row.vehicle !== undefined; else commonPlate" [routerLink]="['/app/profile', row.vehicle.client.id]">{{ row.vehicle.plate }}</a>
+              <ng-template #commonPlate>{{ row.plate }}</ng-template>
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Client DNI" prop="vehicle.client.dni">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <span *ngIf="row.vehicle !== null && row.vehicle !== undefined; else noDni">{{ row.vehicle.client.dni }}</span>
+              <ng-template #noDni>
+                <span>----</span>
+              </ng-template>
+            </ng-template>
+          </ngx-datatable-column>
+
+          <ngx-datatable-column name="Actions" prop="name">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <div>
+                <button *ngIf="row.vehicle !== null && row.vehicle !== undefined; else disabledAction" nbButton ghost><nb-icon icon="maximize-outline" [routerLink]="['/app/profile', row.vehicle.client.id]"></nb-icon></button>
+                <ng-template #disabledAction>
+                  <button nbButton ghost disabled><nb-icon icon="maximize-outline"></nb-icon></button>
+                </ng-template>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

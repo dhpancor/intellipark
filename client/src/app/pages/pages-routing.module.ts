@@ -10,6 +10,7 @@ import {VehicleListComponent} from "./vehicles/vehicles-list/vehicle-list.compon
 import {VehiclesFormComponent} from "./vehicles/vehicles-form/vehicles-form.component";
 import {SingleVehicleResolver} from "../resolvers/single-vehicle.resolver";
 import {ClientDetailComponent} from "./clients/client-detail/client-detail.component";
+import {AccessLogsListComponent} from "./access-logs/access-logs-list/access-logs-list.component";
 
 const routes: Routes = [{
   path: '',
@@ -41,6 +42,10 @@ const routes: Routes = [{
     {
       path: 'vehicles',
       component: VehicleListComponent
+    },
+    {
+      path: 'access-logs',
+      component: AccessLogsListComponent
     },
     {
       path: '',

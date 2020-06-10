@@ -15,6 +15,5 @@ router.get('/stats/todayStats', accessLogController.todayStats);
 // CRUD endpoints
 router.get('/', accessLogController.all);
 router.post('/', accessLogController.save);
-router.put('/:id', accessLogController.save);
 
 export default router;

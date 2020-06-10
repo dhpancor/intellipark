@@ -1,13 +1,13 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {BaseCRUD} from "./base-crud";
-import {Vehicle} from "../models/vehicle";
 import {map} from "rxjs/operators";
+import {AccessLog} from "../models/accesslog";
 
 @Injectable({
   providedIn: 'root',
 })
-export class AccessLogService extends BaseCRUD<Vehicle> {
+export class AccessLogService extends BaseCRUD<AccessLog> {
   constructor(httpClient: HttpClient) {
     super(httpClient, "/access-logs");
   }

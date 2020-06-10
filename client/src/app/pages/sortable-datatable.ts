@@ -40,7 +40,11 @@ export class SortableDatatable<T> {
     if (event !== null) {
       const val = event.target.value.toLowerCase();
       this.rows = this.temp.filter(d => {
-        return _.get(d, this.currentFilter).toLowerCase().indexOf(val) !== -1 || !val;
+        const property = _.get(d, this.currentFilter);
+        if (property) {
+          return property.toLowerCase().indexOf(val) !== -1 || !val;
+        }
+        // return _.get(d, this.currentFilter).toLowerCase().indexOf(val) !== -1 || !val;
       });
 
       // Whenever the filter changes, always go back to the first page
