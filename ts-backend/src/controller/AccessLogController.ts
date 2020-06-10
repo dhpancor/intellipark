@@ -73,4 +73,36 @@ export class AccessLogController extends BaseCRUD {
     }
     return response.send(new JsonResponse(data));
   }
+
+  todayStats = async (request: Request, response: Response) => {
+    let data = null;
+    try {
+      data = [
+        {
+          name: 'Current',
+          value: await getRepository(AccessLog).createQueryBuilder('accesslog')
+            .select('COUNT(*)', 'value')
+            .addSelect('"Current"', 'name')
+            .where('accesslog.leaveTime IS NULL')
+            .groupBy('YEAR(accesslog.createdAt)')
+            .getCount()
+        },
+        {
+          name: 'Today',
+          value: await getRepository(AccessLog)
+            .createQueryBuilder('accesslog')
+            .select('COUNT(*)', 'value')
+            .addSelect('"Today"', 'name')
+            .where('DATE(accesslog.createdAt) = CURDATE()')
+            .orWhere('DATE(accesslog.leaveTime) = CURDATE()')
+            .groupBy('YEAR(accesslog.createdAt)')
+            .getCount()
+        }
+      ];
+    } catch (e) {
+      console.log(e);
+      return response.send(new JsonResponse('Fatal error. Try again later.', false));
+    }
+    return response.send(new JsonResponse(data));
+  }
 }

@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   averageTimeByGender = [];
   averageBusyHours = [];
   yearlyAccessesPerDay = [];
+  todayStats = [];
 
   ngOnInit() {
     this.acccessLogService.averageTimeByGender().subscribe(r => this.averageTimeByGender = r);
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
       r.forEach(i => accessDict[moment(i.date).format()] = i.count);
       this.yearlyAccessesPerDay = this.resultsToCalendar(accessDict);
     });
+    this.acccessLogService.todayStats().subscribe(r => this.todayStats = r);
   }
 
   private resultsToCalendar(results): any[] {
@@ -57,9 +59,6 @@ export class DashboardComponent implements OnInit {
 
         // value
         const value = results[moment(date).format()] ? results[moment(date).format()] : 0;
-        console.log(results[moment(date).format()]);
-        console.log(moment(date).format());
-        console.log(value);
 
         series.push({
           date,

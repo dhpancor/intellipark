@@ -10,6 +10,7 @@ const accessLogController = new AccessLogController();
 router.get('/stats/averageTimeSpentByGender', accessLogController.averageTimeSpentByGender);
 router.get('/stats/averageBusyHours', accessLogController.averageBusyHours);
 router.get('/stats/yearlyAccessesPerDay', accessLogController.yearlyAccessesPerDay);
+router.get('/stats/todayStats', accessLogController.todayStats);
 
 // CRUD endpoints
 router.get('/', accessLogController.all);

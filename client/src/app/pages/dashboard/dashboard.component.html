@@ -33,11 +33,21 @@
       ></ngx-charts-bar-vertical>
     </nb-card>
   </div>
+  <div class="col-lg-2">
+    <nb-card accent="success">
+      <nb-card-header>Today's stats</nb-card-header>
+      <ngx-charts-number-card
+        scheme="picnic"
+        cardColor="#f7f7f7"
+        [results]="this.todayStats"
+      ></ngx-charts-number-card>
+    </nb-card>
+  </div>
 </div>
 <div class="row">
   <div class="col-lg-12">
     <nb-card accent="success">
-      <nb-card-header>Daily access of the last year</nb-card-header>
+      <nb-card-header>Daily accesses for the last year</nb-card-header>
         <ngx-charts-heat-map
           [results]="yearlyAccessesPerDay"
           scheme="picnic"
