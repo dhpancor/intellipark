@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {NbToastrService} from "@nebular/theme";
 import {SortableDatatable} from "../../sortable-datatable";
 import {VehiclesService} from "../../../providers/vehicles.service";
@@ -9,7 +9,7 @@ import {EagerLoadingStrategy} from "../../../providers/types/eager-loading-strat
   selector: 'ngx-vehicle-list',
   templateUrl: './vehicle-list.component.html',
 })
-export class VehicleListComponent extends SortableDatatable<Vehicle> implements OnInit {
+export class VehicleListComponent extends SortableDatatable<Vehicle> implements OnInit, AfterViewInit {
   columns = [
     {prop: 'id', name: '#'},
     {prop: 'plate', name: 'Plate number'},
@@ -24,5 +24,19 @@ export class VehicleListComponent extends SortableDatatable<Vehicle> implements 
   }
 
   ngOnInit() {
+    this.crudService.findAll(this.eagerLoading).subscribe(r => {
+      this.loadingIndicator = false;
+      this.rows = r;
+      this.temp = r;
+    });
+  }
+
+  ngAfterViewInit() {
+    if (!this.table.externalPaging) {
+      this.crudService.findAll(this.eagerLoading).subscribe(r => {
+        this.rows = r;
+        this.temp = r;
+      });
+    }
   }
 }

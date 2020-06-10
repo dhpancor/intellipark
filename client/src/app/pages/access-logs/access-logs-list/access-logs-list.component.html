@@ -1,25 +1,6 @@
 <div class="row">
   <div class="col-xl-12">
     <nb-card>
-      <nb-card-body style="display: flex; justify-content: space-between">
-        <div class="form-inline">
-          <nb-select placeholder="Search by..." (selectedChange)="updateFilter($event)" size="medium">
-            <nb-option [value]="null">Clear filter</nb-option>
-            <nb-option *ngFor="let column of this.columns" [value]="column.prop">{{ column.name }}</nb-option>
-          </nb-select>
-          <input
-            #searchQuery
-            nbInput
-            type="text"
-            style="margin-left: 10px"
-            placeholder="your criteria..."
-            (keyup)="filterResults($event)"
-            [disabled]="this.currentFilter === null"
-          />
-        </div>
-      </nb-card-body>
-    </nb-card>
-    <nb-card>
       <nb-card-header>Access History List</nb-card-header>
       <nb-card-body>
         <ngx-datatable
@@ -31,6 +12,10 @@
           [headerHeight]="50"
           [footerHeight]="50"
           [limit]="10"
+          [count]="page.totalElements"
+          [offset]="page.pageNumber"
+          [externalPaging]="true"
+          (page)="setPage($event)"
           rowHeight="auto"
           reorderable="true"
         >

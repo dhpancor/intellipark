@@ -28,6 +28,11 @@ export class ClientsListComponent extends SortableDatatable<Client> implements O
   }
 
   ngOnInit() {
+    this.crudService.findAll(this.eagerLoading).subscribe(r => {
+      this.loadingIndicator = false;
+      this.rows = r;
+      this.temp = r;
+    });
   }
 
 }

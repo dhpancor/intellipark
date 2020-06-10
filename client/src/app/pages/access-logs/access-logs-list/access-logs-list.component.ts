@@ -25,5 +25,6 @@ export class AccessLogsListComponent extends SortableDatatable<AccessLog> implem
   }
 
   ngOnInit() {
+    this.setPage({ offset: 0 });
   }
 }

@@ -22,7 +22,6 @@ export class AccessLogController extends BaseCRUD {
         .orderBy('client.gender', 'ASC')
         .getRawMany();
     } catch (e) {
-      console.log(e);
       return response.send(new JsonResponse('Fatal error. Try again later.', false));
     }
     return response.send(new JsonResponse(data));
@@ -49,7 +48,6 @@ export class AccessLogController extends BaseCRUD {
         .orderBy('a.hour', 'ASC')
         .getRawMany();
     } catch (e) {
-      console.log(e);
       return response.send(new JsonResponse('Fatal error. Try again later.', false));
     }
     return response.send(new JsonResponse(data));
@@ -68,7 +66,6 @@ export class AccessLogController extends BaseCRUD {
         .orderBy('1', 'ASC')
         .getRawMany();
     } catch (e) {
-      console.log(e);
       return response.send(new JsonResponse('Fatal error. Try again later.', false));
     }
     return response.send(new JsonResponse(data));
@@ -100,7 +97,6 @@ export class AccessLogController extends BaseCRUD {
         }
       ];
     } catch (e) {
-      console.log(e);
       return response.send(new JsonResponse('Fatal error. Try again later.', false));
     }
     return response.send(new JsonResponse(data));

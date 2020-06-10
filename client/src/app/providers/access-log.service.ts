@@ -3,6 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {BaseCRUD} from "./base-crud";
 import {map} from "rxjs/operators";
 import {AccessLog} from "../models/accesslog";
+import {PagedData} from "../models/paged-data";
+import {EagerLoadingStrategy} from "./types/eager-loading-strategy.enum";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root',

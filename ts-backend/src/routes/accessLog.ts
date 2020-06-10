@@ -13,6 +13,7 @@ router.get('/stats/yearlyAccessesPerDay', accessLogController.yearlyAccessesPerD
 router.get('/stats/todayStats', accessLogController.todayStats);
 
 // CRUD endpoints
+router.get('/paginated', accessLogController.paginatedFindAll);
 router.get('/', accessLogController.all);
 router.post('/', accessLogController.save);
 

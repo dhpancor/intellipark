@@ -4,6 +4,7 @@ import {ElementRef, ViewChild} from "@angular/core";
 import {ColumnMode, DatatableComponent} from "@swimlane/ngx-datatable";
 import {EagerLoadingStrategy} from "../providers/types/eager-loading-strategy.enum";
 import * as _ from "lodash";
+import {PagedData} from "../models/paged-data";
 
 interface DatatableColumn {
   prop: string;
@@ -14,6 +15,7 @@ export class SortableDatatable<T> {
   currentFilter = null;
   temp: T[] = [];
   rows: T[] = [];
+  page: PagedData<T[]> = {};
   columns: DatatableColumn[] = null;
   loadingIndicator = true;
 
@@ -23,10 +25,19 @@ export class SortableDatatable<T> {
   ColumnMode = ColumnMode;
 
   constructor(public crudService: BaseCRUD<T>, public nbToastrService: NbToastrService, public eagerLoading?: EagerLoadingStrategy) {
-    this.crudService.findAll(eagerLoading).subscribe(r => {
+    this.page.pageNumber = 0;
+    this.page.size = 10;
+  }
+
+  setPage(pageNumber) {
+    this.loadingIndicator = true;
+    this.page.pageNumber = pageNumber.offset;
+    this.crudService.findPaginated(pageNumber.offset, this.eagerLoading).subscribe(r => {
       this.loadingIndicator = false;
-      this.temp = r;
-      this.rows = r;
+      this.rows = r.data;
+      this.temp = r.data;
+      delete r.data;
+      this.page = r;
     });
   }
 

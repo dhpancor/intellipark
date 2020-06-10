@@ -3,6 +3,8 @@ import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 import {map} from "rxjs/operators";
 import {EagerLoadingStrategy} from "./types/eager-loading-strategy.enum";
+import {PagedData} from "../models/paged-data";
+import {AccessLog} from "../models/accesslog";
 
 @Injectable()
 export class BaseCRUD<T> {
@@ -24,6 +26,11 @@ export class BaseCRUD<T> {
       .pipe(map(result => result['data']));
   }
 
+  findPaginated(page: number = 0, eagerLoading?: EagerLoadingStrategy): Observable<PagedData<T[]>> {
+    const endpointSuffix = (eagerLoading !== undefined ? `${this.getEagerLoadingEndpoint(eagerLoading)}&` : '?');
+    return this.httpClient.get(this.baseUrl + this.specificEndpoint + `/paginated${endpointSuffix}page=${page}`);
+  }
+
   create(object: T): Observable<T> {
     return this.httpClient.post<T>(this.baseUrl + this.specificEndpoint, object)
       .pipe(map(result => result['success'] ? result['data'] : null));
@@ -39,7 +46,7 @@ export class BaseCRUD<T> {
       .pipe(map(result => result['data']));
   }
 
-  private getEagerLoadingEndpoint(strategy: EagerLoadingStrategy): string {
+  protected getEagerLoadingEndpoint(strategy: EagerLoadingStrategy): string {
     return `?with${strategy}=true`;
   }
 }
