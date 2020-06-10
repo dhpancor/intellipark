@@ -54,4 +54,23 @@ export class AccessLogController extends BaseCRUD {
     }
     return response.send(new JsonResponse(data));
   }
+
+  yearlyAccessesPerDay = async (request: Request, response: Response) => {
+    let data = null;
+    try {
+      data = await getRepository(AccessLog)
+        .createQueryBuilder('accesslog')
+        .select('DATE(accesslog.createdAt)', 'date')
+        .addSelect('COUNT(*)', 'count')
+        .where('YEAR(accesslog.createdAt) >= YEAR(CURDATE()) - 1')
+        .orWhere('YEAR(accesslog.createdAt) = YEAR(CURDATE()) -1 AND MONTH(accesslog.createdAt) >= MONTH(CURDATE())')
+        .groupBy('DATE(accesslog.createdAt)')
+        .orderBy('1', 'ASC')
+        .getRawMany();
+    } catch (e) {
+      console.log(e);
+      return response.send(new JsonResponse('Fatal error. Try again later.', false));
+    }
+    return response.send(new JsonResponse(data));
+  }
 }

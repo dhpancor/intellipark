@@ -3,7 +3,7 @@ import {NbCardModule} from '@nebular/theme';
 
 import {ThemeModule} from '../../@theme/theme.module';
 import {DashboardComponent} from './dashboard.component';
-import {BarChartModule, NumberCardModule} from "@swimlane/ngx-charts";
+import {BarChartModule, HeatMapModule, NumberCardModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   imports: [
@@ -11,6 +11,7 @@ import {BarChartModule, NumberCardModule} from "@swimlane/ngx-charts";
     ThemeModule,
     NumberCardModule,
     BarChartModule,
+    HeatMapModule,
   ],
   declarations: [
     DashboardComponent,

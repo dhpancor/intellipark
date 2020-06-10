@@ -21,4 +21,9 @@ export class AccessLogService extends BaseCRUD<Vehicle> {
     return this.httpClient.get(this.baseUrl + this.specificEndpoint + `/stats/averageBusyHours`)
       .pipe(map(result => result['data']));
   }
+
+  yearlyAccessesPerDay() {
+    return this.httpClient.get(this.baseUrl + this.specificEndpoint + `/stats/yearlyAccessesPerDay`)
+      .pipe(map(result => result['data']));
+  }
 }
