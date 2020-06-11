@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { JsonResponse } from './utils/JsonResponse';
 import { AccessLog } from '../entity/AccessLog';
 import { getConnection, getRepository } from 'typeorm';
+import { HumanMillisecondsTime } from './utils/HumanMillisecondsTime';
 
 export class AccessLogController extends BaseCRUD {
   constructor () {
@@ -20,6 +21,7 @@ export class AccessLogController extends BaseCRUD {
         .addSelect('client.gender', 'name')
         .groupBy('client.gender')
         .orderBy('client.gender', 'ASC')
+        .cache(HumanMillisecondsTime['3_HOURS'])
         .getRawMany();
     } catch (e) {
       return response.send(new JsonResponse('Fatal error. Try again later.', false));
@@ -37,7 +39,8 @@ export class AccessLogController extends BaseCRUD {
         .groupBy('HOUR(accesslog.createdAt)')
         .addGroupBy('DATE(accesslog.createdAt)')
         .orderBy('1', 'ASC')
-        .addOrderBy('2', 'ASC');
+        .addOrderBy('2', 'ASC')
+        .cache(HumanMillisecondsTime['6_HOURS']); // 6 hours
 
       data = await getConnection()
         .createQueryBuilder()
@@ -46,6 +49,7 @@ export class AccessLogController extends BaseCRUD {
         .from('(' + subquery.getQuery() + ')', 'a')
         .groupBy('a.hour')
         .orderBy('a.hour', 'ASC')
+        .cache(HumanMillisecondsTime['6_HOURS']) // 6 hours
         .getRawMany();
     } catch (e) {
       return response.send(new JsonResponse('Fatal error. Try again later.', false));
@@ -64,6 +68,7 @@ export class AccessLogController extends BaseCRUD {
         .orWhere('YEAR(accesslog.createdAt) = YEAR(CURDATE()) -1 AND MONTH(accesslog.createdAt) >= MONTH(CURDATE())')
         .groupBy('DATE(accesslog.createdAt)')
         .orderBy('1', 'ASC')
+        .cache(HumanMillisecondsTime['6_HOURS'])
         .getRawMany();
     } catch (e) {
       return response.send(new JsonResponse('Fatal error. Try again later.', false));

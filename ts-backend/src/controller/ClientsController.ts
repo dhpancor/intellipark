@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import { JsonResponse } from './utils/JsonResponse';
 import { AccessLog } from '../entity/AccessLog';
+import { HumanMillisecondsTime } from './utils/HumanMillisecondsTime';
 
 export class ClientsController extends BaseCRUD {
   constructor () {
@@ -13,7 +14,6 @@ export class ClientsController extends BaseCRUD {
   getLastAccesses = async (request: Request, response: Response) => {
     let data = null;
     try {
-      // data = await getRepository(Client).findOne(request.params.id, { relations: ['vehicle', 'vehicle.accessLogs'] });
       data = await getRepository(AccessLog)
         .createQueryBuilder('accesslog')
         .innerJoin('accesslog.vehicle', 'vehicle')
@@ -44,6 +44,7 @@ export class ClientsController extends BaseCRUD {
         .innerJoin('vehicle.client', 'client')
         .where('client.id = :clientId')
         .setParameters({ clientId: request.params.id })
+        .cache(HumanMillisecondsTime['1_HOUR'])
         .getRawMany();
     } catch (e) {
       console.log(e);
@@ -66,6 +67,7 @@ export class ClientsController extends BaseCRUD {
         .orderBy('date(accesslog.leaveTime)', 'DESC')
         .setParameters({ clientId: request.params.id })
         .limit(7)
+        .cache(HumanMillisecondsTime['1_HOUR'])
         .getRawMany();
     } catch (e) {
       console.log(e);
