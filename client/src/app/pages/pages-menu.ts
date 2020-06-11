@@ -22,4 +22,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'book-open-outline',
     link: '/app/access-logs',
   },
+  {
+    title: 'Settings',
+    group: true
+  },
+  {
+    title: 'Administrators',
+    icon: 'options-2-outline',
+    link: '/app/users'
+  }
 ];

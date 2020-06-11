@@ -8,6 +8,7 @@ import {PagesRoutingModule} from './pages-routing.module';
 import {ClientsModule} from './clients/clients.module';
 import {VehiclesModule} from './vehicles/vehicles.module';
 import {AccessLogsModule} from "./access-logs/access-logs.module";
+import {UsersModule} from "./users/users.module";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {AccessLogsModule} from "./access-logs/access-logs.module";
     DashboardModule,
     ClientsModule,
     VehiclesModule,
-    AccessLogsModule
+    AccessLogsModule,
+    UsersModule
   ],
   declarations: [
     PagesComponent,

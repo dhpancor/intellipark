@@ -12,7 +12,6 @@ export class UsersController extends BaseCRUD {
 
   save = async (request: Request, response: Response) => {
     const repository = getRepository(this.entityClass);
-    let data = null;
     try {
       const user = new User();
       if (request.body.newPassword) {
@@ -23,7 +22,7 @@ export class UsersController extends BaseCRUD {
         delete request.body.password;
       }
       Object.assign(user, request.body);
-      data = await repository.save(user);
+      await repository.save(user);
     } catch (e) {
       if (e instanceof QueryFailedError) {
         return response.send(new JsonResponse('Values submitted were not valid.', false));

@@ -28,7 +28,6 @@ export class DashboardComponent implements OnInit {
 
   private resultsToCalendar(results): any[] {
     const data = [];
-    console.log(results);
 
     // today
     const now = new Date();

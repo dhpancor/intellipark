@@ -9,7 +9,7 @@ import {EagerLoadingStrategy} from "../../../providers/types/eager-loading-strat
   selector: 'ngx-vehicle-list',
   templateUrl: './vehicle-list.component.html',
 })
-export class VehicleListComponent extends SortableDatatable<Vehicle> implements OnInit, AfterViewInit {
+export class VehicleListComponent extends SortableDatatable<Vehicle> implements OnInit {
   columns = [
     {prop: 'id', name: '#'},
     {prop: 'plate', name: 'Plate number'},
@@ -29,14 +29,5 @@ export class VehicleListComponent extends SortableDatatable<Vehicle> implements 
       this.rows = r;
       this.temp = r;
     });
-  }
-
-  ngAfterViewInit() {
-    if (!this.table.externalPaging) {
-      this.crudService.findAll(this.eagerLoading).subscribe(r => {
-        this.rows = r;
-        this.temp = r;
-      });
-    }
   }
 }

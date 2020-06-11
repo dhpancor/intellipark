@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-xl-12">
+    <nb-card>
+      <nb-card-body style="display: flex; justify-content: space-between">
+        <div class="form-inline">
+          <nb-select placeholder="Search by..." (selectedChange)="updateFilter($event)" size="medium">
+            <nb-option [value]="null">Clear filter</nb-option>
+            <nb-option *ngFor="let column of this.columns" [value]="column.prop">{{ column.name }}</nb-option>
+          </nb-select>
+          <input
+            #searchQuery
+            nbInput
+            type="text"
+            style="margin-left: 10px"
+            placeholder="your criteria..."
+            (keyup)="filterResults($event)"
+            [disabled]="this.currentFilter === null"
+          />
+        </div>
+      </nb-card-body>
+    </nb-card>
+    <nb-card>
+      <nb-card-header>User List</nb-card-header>
+      <nb-card-body>
+        <ngx-datatable
+          #table
+          class="material striped"
+          [loadingIndicator]="this.loadingIndicator"
+          [rows]="rows"
+          [columnMode]="ColumnMode.force"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [limit]="10"
+          rowHeight="auto"
+          reorderable="true"
+        >
+          <ngx-datatable-column *ngFor="let column of columns" [prop]="column.prop"
+                                [name]="column.name"></ngx-datatable-column>
+
+          <ngx-datatable-column name="Actions" prop="name">
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <div>
+                <button nbButton ghost><nb-icon icon="maximize-outline" [routerLink]="['', row.id]"></nb-icon></button>
+                <button nbButton ghost status="danger"><nb-icon icon="trash-2-outline" (click)="deleteListItem(row)"></nb-icon></button>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
