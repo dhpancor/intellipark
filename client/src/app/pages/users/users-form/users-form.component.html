@@ -7,40 +7,14 @@
         <form [formGroup]="this.form" (ngSubmit)="onFormSubmit()">
 
           <div class="form-group row">
-            <label for="dni" class="col-sm-2 col-form-label">DNI or equivalent</label>
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
             <div class="col-sm-10">
               <input nbInput fullWidth
-                     [status]="this.form.get('dni').errors && this.form.get('dni').touched ? 'danger' : ''"
-                     formControlName="dni" class="form-control" id="dni" type="text" aria-describedby="dniHelp"
-                     placeholder="Enter the DNI">
-              <small [hidden]="!(this.form.get('dni').errors && this.form.get('dni').touched)" class="text-danger">Enter
-                a valid DNI please.</small>
-              <small id="dniHelp" class="form-text text-muted">DNI, NIF, NIE or the identification number for this
-                client.</small>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
-            <div class="col-sm-10">
-              <input nbInput fullWidth
-                     [status]="this.form.get('first_name').errors && this.form.get('first_name').touched ? 'danger' : ''"
-                     formControlName="first_name" class="form-control" id="first_name" type="text"
-                     placeholder="Enter the first name">
-              <small [hidden]="!(this.form.get('first_name').errors && this.form.get('first_name').touched)"
-                     class="text-danger">Enter a valid first name please.</small>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
-            <div class="col-sm-10">
-              <input nbInput fullWidth
-                     [status]="this.form.get('last_name').errors && this.form.get('last_name').touched ? 'danger' : ''"
-                     formControlName="last_name" class="form-control" id="last_name" type="text"
-                     placeholder="Enter the last name">
-              <small [hidden]="!(this.form.get('last_name').errors && this.form.get('last_name').touched)"
-                     class="text-danger">Enter a valid last name please.</small>
+                     [status]="this.form.get('name').errors && this.form.get('name').touched ? 'danger' : ''"
+                     formControlName="name" class="form-control" id="name" type="text" aria-describedby="nameHelp"
+                     placeholder="Enter the name">
+              <small [hidden]="!(this.form.get('name').errors && this.form.get('name').touched)"
+                     class="text-danger">Enter a valid name please.</small>
             </div>
           </div>
 
@@ -57,26 +31,14 @@
           </div>
 
           <div class="form-group row">
-            <label for="gender" class="col-sm-2 col-form-label">Gender</label>
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-              <nb-select id='gender' fullWidth
-                         [status]="this.form.get('gender').errors && this.form.get('gender').dirty ? 'danger' : ''"
-                         formControlName="gender" placeholder="Gender">
-                <nb-option [value]="'Male'">Male</nb-option>
-                <nb-option [value]="'Female'">Female</nb-option>
-                <nb-option [value]="'Other'">Other</nb-option>
-              </nb-select>
-              <small [hidden]="!(this.form.get('gender').errors && this.form.get('gender').dirty)" class="text-danger">Enter
-                a valid gender please.</small>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="comments" class="col-sm-2 col-form-label">Additional data</label>
-            <div class="col-sm-10">
-              <textarea nbInput fullWidth formControlName="comments" placeholder="There is no additional data"
-                        class="form-control" id="comments" aria-describedby="commentsHelp"></textarea>
-              <small id="commentsHelp" class="form-text text-muted">You can leave this field blank.</small>
+              <input nbInput fullWidth
+                     [status]="this.form.get('password').errors && this.form.get('password').touched ? 'danger' : ''"
+                     formControlName="password" class="form-control" id="password" type="password" aria-describedby="nameHelp">
+              <small [hidden]="!(this.form.get('password').errors && this.form.get('password').touched)"
+                     class="text-danger">Enter a valid password please.</small>
+              <small *ngIf="this.route.snapshot.params.id !== 'new'" id="passwordHelp" class="form-text text-muted">Leave blank to not modify the password.</small>
             </div>
           </div>
 

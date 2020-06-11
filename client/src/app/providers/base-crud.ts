@@ -17,13 +17,13 @@ export class BaseCRUD<T> {
   findOne(id: number, eagerLoading?: EagerLoadingStrategy): Observable<T> {
     const endpointSuffix = `/${id}` + (eagerLoading !== undefined ? this.getEagerLoadingEndpoint(eagerLoading) : '');
     return this.httpClient.get<T>(this.baseUrl + this.specificEndpoint + endpointSuffix)
-      .pipe(map(result => result['data']));
+      .pipe(map(result => result['success'] ? result['data'] : null));
   }
 
   findAll(eagerLoading?: EagerLoadingStrategy): Observable<T[]> {
     const endpointSuffix = (eagerLoading !== undefined ? `/${this.getEagerLoadingEndpoint(eagerLoading)}` : '');
     return this.httpClient.get<T[]>(this.baseUrl + this.specificEndpoint + endpointSuffix)
-      .pipe(map(result => result['data']));
+      .pipe(map(result => result['success'] ? result['data'] : null));
   }
 
   findPaginated(page: number = 0, eagerLoading?: EagerLoadingStrategy): Observable<PagedData<T[]>> {
@@ -38,12 +38,12 @@ export class BaseCRUD<T> {
 
   update(object: T): Observable<T> {
     return this.httpClient.put<T>(this.baseUrl + this.specificEndpoint + `/${object['id']}`, object)
-      .pipe(map(result => result['data']));
+      .pipe(map(result => result['success'] ? result['data'] : null));
   }
 
   delete(id: number): Observable<T> {
     return this.httpClient.delete<T>(this.baseUrl + this.specificEndpoint + `/${id}`)
-      .pipe(map(result => result['data']));
+      .pipe(map(result => result['success'] ? result['data'] : null));
   }
 
   protected getEagerLoadingEndpoint(strategy: EagerLoadingStrategy): string {

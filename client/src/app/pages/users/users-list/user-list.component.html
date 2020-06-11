@@ -17,6 +17,9 @@
             [disabled]="this.currentFilter === null"
           />
         </div>
+        <div style="float: right">
+          <a [routerLink]="['new']" nbButton>CREATE</a>
+        </div>
       </nb-card-body>
     </nb-card>
     <nb-card>
@@ -40,7 +43,7 @@
           <ngx-datatable-column name="Actions" prop="name">
             <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
               <div>
-                <button nbButton ghost><nb-icon icon="maximize-outline" [routerLink]="['', row.id]"></nb-icon></button>
+                <button nbButton ghost><nb-icon icon="edit-outline" [routerLink]="[row.id]"></nb-icon></button>
                 <button nbButton ghost status="danger"><nb-icon icon="trash-2-outline" (click)="deleteListItem(row)"></nb-icon></button>
               </div>
             </ng-template>

@@ -4,6 +4,8 @@ import {Client} from "../../../models/client";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NbToastrService} from "@nebular/theme";
+import {UsersService} from "../../../providers/users.service";
+import {User} from "../../../models/user";
 
 @Component({
   selector: 'ngx-users-form',
@@ -11,50 +13,49 @@ import {NbToastrService} from "@nebular/theme";
 })
 export class UsersFormComponent implements OnInit {
 
-  constructor(private clientService: ClientsService, public route: ActivatedRoute, private fb: FormBuilder,
+  constructor(private usersService: UsersService, public route: ActivatedRoute, private fb: FormBuilder,
               private nbToastrService: NbToastrService, private router: Router) {
   }
 
-  client: Client = null;
-  form: FormGroup = this.fb.group({
-    dni: ['', [Validators.required, Validators.minLength(8)]],
-    first_name: ['', [Validators.required, Validators.minLength(2)]],
-    last_name: ['', [Validators.required, Validators.minLength(4)]],
-    comments: [''],
-    email: ['', [Validators.required, Validators.email]],
-    gender: ['', [Validators.required]],
-  });
+  user: User = null;
+  form: FormGroup;
 
   ngOnInit(): void {
-    this.client = this.route.snapshot.data.client;
+    if (this.route.snapshot.params.id === 'new') {
+      this.form = this.fb.group({
+        email: ['', [Validators.required, Validators.minLength(4)]],
+        name: ['', [Validators.required, Validators.minLength(2)]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+      });
+    } else {
+      this.form = this.fb.group({
+        email: ['', [Validators.required, Validators.minLength(4)]],
+        name: ['', [Validators.required, Validators.minLength(2)]],
+        password: [''],
+      });
+    }
+    this.user = this.route.snapshot.data.user;
     this.updateFormValues();
   }
 
   onFormSubmit(): void {
     if (this.form.valid && this.form.dirty) {
-      this.client.dni = this.form.get('dni').value;
-      this.client.first_name = this.form.get('first_name').value;
-      this.client.last_name = this.form.get('last_name').value;
-      this.client.email = this.form.get('email').value;
-      this.client.gender = this.form.get('gender').value;
-      this.client.comments = this.form.get('comments').value;
-
+      this.user.name = this.form.get('name').value;
+      this.user.email = this.form.get('email').value;
+      this.user.password = this.form.get('password').value;
       if (this.route.snapshot.params.id === 'new') {
-        this.clientService.create(this.client).subscribe(r => r !== null ? this.successfulOperation() : this.operationError());
+        this.usersService.create(this.user).subscribe(r => r !== null ? this.successfulOperation() : this.operationError());
       } else {
-        this.clientService.update(this.client).subscribe(r => r !== null ? this.successfulOperation() : this.operationError());
+        this.usersService.update(this.user).subscribe(r => r !== null ? this.successfulOperation() : this.operationError());
       }
     }
   }
 
   updateFormValues(): void {
     this.form.setValue({
-      dni: this.client.dni,
-      first_name: this.client.first_name,
-      last_name: this.client.last_name,
-      email: this.client.email,
-      gender: this.client.gender,
-      comments: this.client.comments,
+      name: this.user.name,
+      email: this.user.email,
+      password: ''
     });
   }
 
@@ -64,6 +65,6 @@ export class UsersFormComponent implements OnInit {
   }
 
   operationError(): void {
-    this.nbToastrService.show("There was an error. Try again please.", "Ooops!", {status: 'danger'});
+    this.nbToastrService.show("That email is already being used.", "Ooops!", {status: 'danger'});
   }
 }
