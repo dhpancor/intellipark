@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
     this.acccessLogService.averageBusyHours().subscribe(r => this.averageBusyHours = r);
     this.acccessLogService.yearlyAccessesPerDay().subscribe(r => {
       const accessDict: { [date: string]: number} = {};
-      r.forEach(i => accessDict[moment(i.date).format()] = i.count);
+      r.forEach(i => accessDict[moment(i.date).format('L')] = i.count);
       this.yearlyAccessesPerDay = this.resultsToCalendar(accessDict);
     });
     this.acccessLogService.todayStats().subscribe(r => this.todayStats = r);
@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
         }
 
         // value
-        const value = results[moment(date).format()] ? results[moment(date).format()] : 0;
+        const value = results[moment(date).format('L')] ? results[moment(date).format('L')] : 0;
 
         series.push({
           date,

@@ -40,7 +40,7 @@ export class AccessLogController extends BaseCRUD {
         .addGroupBy('DATE(accesslog.createdAt)')
         .orderBy('1', 'ASC')
         .addOrderBy('2', 'ASC')
-        .cache(HumanMillisecondsTime['6_HOURS']); // 6 hours
+        .cache(HumanMillisecondsTime['3_HOURS']); // 6 hours
 
       data = await getConnection()
         .createQueryBuilder()
@@ -49,7 +49,7 @@ export class AccessLogController extends BaseCRUD {
         .from('(' + subquery.getQuery() + ')', 'a')
         .groupBy('a.hour')
         .orderBy('a.hour', 'ASC')
-        .cache(HumanMillisecondsTime['6_HOURS']) // 6 hours
+        .cache(HumanMillisecondsTime['3_HOURS']) // 6 hours
         .getRawMany();
     } catch (e) {
       return response.send(new JsonResponse('Fatal error. Try again later.', false));
@@ -64,11 +64,10 @@ export class AccessLogController extends BaseCRUD {
         .createQueryBuilder('accesslog')
         .select('DATE(accesslog.createdAt)', 'date')
         .addSelect('COUNT(*)', 'count')
-        .where('YEAR(accesslog.createdAt) >= YEAR(CURDATE()) - 1')
-        .orWhere('YEAR(accesslog.createdAt) = YEAR(CURDATE()) -1 AND MONTH(accesslog.createdAt) >= MONTH(CURDATE())')
+        .where('YEAR(accesslog.createdAt) >= (YEAR(CURDATE()) - 1) AND MONTH(accesslog.createdAt) >= MONTH(CURDATE())')
         .groupBy('DATE(accesslog.createdAt)')
         .orderBy('1', 'ASC')
-        .cache(HumanMillisecondsTime['6_HOURS'])
+        .cache(HumanMillisecondsTime['3_HOURS'])
         .getRawMany();
     } catch (e) {
       return response.send(new JsonResponse('Fatal error. Try again later.', false));

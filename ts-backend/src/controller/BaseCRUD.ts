@@ -32,7 +32,7 @@ export class BaseCRUD {
     const page = 'page' in request.query ? Number(request.query.page) : 0;
     const take = 10;
     try {
-      data = await repository.findAndCount({ relations: this.eagerLoading(request), order: { id: 'DESC' }, skip: page * take, take });
+      data = await repository.findAndCount({ relations: this.eagerLoading(request), order: { createdAt: 'DESC' }, skip: page * take, take });
     } catch (e) {
       if (e instanceof FindRelationsNotFoundError) {
         return response.send(new JsonResponse('Invalid eager loading parameter.', false));
