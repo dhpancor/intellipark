@@ -3,7 +3,7 @@ import { getRepository } from 'typeorm';
 import { User } from '../entity/User';
 import { JsonResponse } from './utils/JsonResponse';
 import * as jwt from 'jsonwebtoken';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { JWT_SECRET } from '../loader/PassportLoader';
 
 export class AuthController {

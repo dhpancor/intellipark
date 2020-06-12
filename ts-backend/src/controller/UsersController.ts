@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { JsonResponse } from './utils/JsonResponse';
 import { User } from '../entity/User';
 import { getRepository, QueryFailedError } from 'typeorm';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 export class UsersController extends BaseCRUD {
   constructor () {
