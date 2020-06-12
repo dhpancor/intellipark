@@ -8,7 +8,7 @@ import {PagedData} from "../models/paged-data";
 @Injectable()
 export class BaseCRUD<T> {
 
-  protected baseUrl = "http://localhost:4200/api/v1";
+  protected baseUrl = "/api/v1";
 
   constructor(protected httpClient: HttpClient, protected specificEndpoint: string | string[]) {
   }
