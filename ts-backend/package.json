@@ -42,7 +42,7 @@
   },
   "scripts": {
     "dev": "ts-node src/index.ts",
-    "build": "npm install && rimraf ./build && tsc && cp -r ./client_dist ./build/public",
+    "build": "npm install && rimraf ./build && tsc",
     "start": "npm run build && node build/index.js",
     "nodemon": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts"
   },
