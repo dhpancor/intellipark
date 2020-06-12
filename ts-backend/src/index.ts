@@ -15,7 +15,10 @@ createConnection({
   port: 3306,
   username: 'admin',
   password: 'g0dsenkuxd',
-  database: 'intellipark'
+  database: 'intellipark',
+  entities: [
+    'entity/*.js'
+  ]
 }).then(async connection => {
   // create express app
   const app = express();
