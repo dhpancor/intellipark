@@ -4,7 +4,6 @@ import {Injectable} from "@angular/core";
 import {map} from "rxjs/operators";
 import {EagerLoadingStrategy} from "./types/eager-loading-strategy.enum";
 import {PagedData} from "../models/paged-data";
-import {AccessLog} from "../models/accesslog";
 
 @Injectable()
 export class BaseCRUD<T> {

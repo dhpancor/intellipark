@@ -8,7 +8,6 @@ import {ClientsFormComponent} from "./clients/clients-form/clients-form.componen
 import {SingleClientResolver} from "../resolvers/single-client.resolver";
 import {VehicleListComponent} from "./vehicles/vehicles-list/vehicle-list.component";
 import {VehiclesFormComponent} from "./vehicles/vehicles-form/vehicles-form.component";
-import {SingleVehicleResolver} from "../resolvers/single-vehicle.resolver";
 import {ClientDetailComponent} from "./clients/client-detail/client-detail.component";
 import {AccessLogsListComponent} from "./access-logs/access-logs-list/access-logs-list.component";
 import {UserListComponent} from "./users/users-list/user-list.component";

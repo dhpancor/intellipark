@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NbToastrService} from "@nebular/theme";
 import {SortableDatatable} from "../../sortable-datatable";
-import {VehiclesService} from "../../../providers/vehicles.service";
-import {Vehicle} from "../../../models/vehicle";
 import {EagerLoadingStrategy} from "../../../providers/types/eager-loading-strategy.enum";
 import {AccessLog} from "../../../models/accesslog";
 import {AccessLogService} from "../../../providers/access-log.service";

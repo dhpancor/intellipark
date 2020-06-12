@@ -1,6 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {ClientsService} from "../../../providers/clients.service";
-import {Client} from "../../../models/client";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NbToastrService} from "@nebular/theme";

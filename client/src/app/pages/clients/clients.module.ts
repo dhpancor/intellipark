@@ -6,7 +6,8 @@ import {
   NbButtonModule,
   NbCardModule,
   NbIconModule,
-  NbInputModule, NbListModule,
+  NbInputModule,
+  NbListModule,
   NbSelectModule
 } from "@nebular/theme";
 import {NgxDatatableModule} from "@swimlane/ngx-datatable";
@@ -14,7 +15,6 @@ import {RouterModule} from "@angular/router";
 import {ClientsFormComponent} from "./clients-form/clients-form.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ClientDetailComponent} from "./client-detail/client-detail.component";
-import {ChartModule} from "angular2-chartjs";
 import {BarChartModule, PieChartModule} from "@swimlane/ngx-charts";
 
 @NgModule({

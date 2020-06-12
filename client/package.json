@@ -14,7 +14,7 @@
     "conventional-changelog": "conventional-changelog",
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
-    "build:prod": "npm run build -- --prod --aot",
+    "build:prod": "npm run build --prod --aot",
     "test": "ng test",
     "test:coverage": "rimraf coverage && npm run test -- --code-coverage",
     "lint": "ng lint",
@@ -30,7 +30,7 @@
   "dependencies": {
     "@agm/core": "^1.0.0-beta.5",
     "@angular/animations": "^8.0.0",
-    "@angular/cdk": "^8.0.0",
+    "@angular/cdk": "^8.2.3",
     "@angular/common": "^8.0.0",
     "@angular/compiler": "^8.0.0",
     "@angular/core": "^8.0.0",
@@ -42,7 +42,7 @@
     "@nebular/eva-icons": "4.1.2",
     "@nebular/security": "4.1.2",
     "@nebular/theme": "4.1.2",
-    "@swimlane/ngx-charts": "^14.0.0",
+    "@swimlane/ngx-charts": "12.0.1",
     "@swimlane/ngx-datatable": "^17.0.0",
     "angular2-chartjs": "^0.5.1",
     "bootstrap": "4.3.1",
@@ -91,7 +91,19 @@
     "ts-node": "3.2.2",
     "tslint": "^5.7.0",
     "tslint-language-service": "^0.9.9",
-    "typescript": "~3.4.5"
+    "typescript": "~3.4.5",
+    "d3": "^4.10.2",
+    "d3-array": "^1.2.1",
+    "d3-brush": "^1.0.4",
+    "d3-color": "^1.0.3",
+    "d3-force": "^1.1.0",
+    "d3-format": "^1.2.0",
+    "d3-hierarchy": "^1.1.5",
+    "d3-interpolate": "^1.1.5",
+    "d3-scale": "^1.0.6",
+    "d3-selection": "^1.1.0",
+    "d3-shape": "^1.2.0",
+    "d3-time-format": "^2.1.0"
   },
   "proxy": "http://localhost:3000"
 }

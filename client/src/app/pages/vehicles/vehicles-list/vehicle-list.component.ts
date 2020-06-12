@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NbToastrService} from "@nebular/theme";
 import {SortableDatatable} from "../../sortable-datatable";
 import {VehiclesService} from "../../../providers/vehicles.service";
