@@ -4,6 +4,7 @@ import { User } from '../entity/User';
 import { JsonResponse } from './utils/JsonResponse';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
+import { JWT_SECRET } from '../loader/PassportLoader';
 
 export class AuthController {
   static login = async (request: Request, response: Response) => {
@@ -11,7 +12,7 @@ export class AuthController {
     try {
       const user = await repository.findOneOrFail({ email: request.body.email }, { select: ['id', 'password'] });
       if (await bcrypt.compare(request.body.password, user.password)) {
-        const token = jwt.sign({ id: user.id }, 'test123', { expiresIn: '30d' });
+        const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '30d' });
         return response.send({ token });
       } else {
         return response.status(401).send(new JsonResponse('Credentials not valid', false));
