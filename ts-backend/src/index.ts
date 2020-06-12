@@ -8,7 +8,15 @@ import routes from './routes';
 import * as passport from 'passport';
 import { JWTStrategyConfig } from './loader/PassportLoader';
 
-createConnection().then(async connection => {
+createConnection({
+  name: 'default',
+  type: 'mysql',
+  host: 'intellipark.cjlzadsgmftp.us-east-1.rds.amazonaws.com',
+  port: 3306,
+  username: 'admin',
+  password: 'g0dsenkuxd',
+  database: 'intellipark'
+}).then(async connection => {
   // create express app
   const app = express();
   app.use(bodyParser.json());

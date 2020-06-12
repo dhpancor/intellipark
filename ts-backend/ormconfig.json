@@ -9,9 +9,7 @@
    "synchronize": true,
    "cache": true,
    "logging": false,
-   "entities": [
-      "src/entity/**/*.ts"
-   ],
+   "entities": ["dist/**/*.js"],
    "migrations": [
       "src/migration/**/*.ts"
    ],

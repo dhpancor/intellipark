@@ -1,4 +1,11 @@
 {
+   "include": [
+      "src/**/*"
+   ],
+   "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+   ],
    "compilerOptions": {
       "lib": [
         "es5",
@@ -10,6 +17,8 @@
       "outDir": "./build",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "sourceMap": true
+      "sourceMap": true,
+      "allowJs": true,
+      "allowSyntheticDefaultImports": true
    }
 }
