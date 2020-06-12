@@ -5,6 +5,7 @@ import {ColumnMode, DatatableComponent} from "@swimlane/ngx-datatable";
 import {EagerLoadingStrategy} from "../providers/types/eager-loading-strategy.enum";
 import * as _ from "lodash";
 import {PagedData} from "../models/paged-data";
+import * as moment from "moment";
 
 interface DatatableColumn {
   prop: string;
@@ -34,6 +35,12 @@ export class SortableDatatable<T> {
     this.page.pageNumber = pageNumber.offset;
     this.crudService.findPaginated(pageNumber.offset, this.eagerLoading).subscribe(r => {
       this.loadingIndicator = false;
+      r.data = r.data.map(a => {
+        return({
+          ...a,
+          createdAt: moment(a['createdAt']).calendar()
+        });
+      });
       this.rows = r.data;
       this.temp = r.data;
       delete r.data;

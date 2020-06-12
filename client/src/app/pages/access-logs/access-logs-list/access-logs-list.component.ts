@@ -12,6 +12,7 @@ import {AccessLogService} from "../../../providers/access-log.service";
 export class AccessLogsListComponent extends SortableDatatable<AccessLog> implements OnInit {
   columns = [
     {prop: 'id', name: '#'},
+    {prop: 'createdAt', name: 'Date'},
     {prop: 'plate', name: 'Plate number'},
     {prop: 'vehicle.client.dni', name: 'Client DNI'}];
 

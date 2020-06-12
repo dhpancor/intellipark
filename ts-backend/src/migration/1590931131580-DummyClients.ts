@@ -7,6 +7,7 @@ import { AccessLog } from '../entity/AccessLog';
 export class DummyClients1590931131580 implements MigrationInterface {
   public async up (queryRunner: QueryRunner): Promise<void> {
     const clients = await getRepository(Client).save(DummyClientsSeed);
+    console.log('Executing migration for dummy clients data...');
     for (const client of clients) {
       // Generate a random number of vehicles per client. From zero to 3.
       for (let i = 0; i < Math.floor(Math.random() * (4)); i++) {
@@ -21,12 +22,27 @@ export class DummyClients1590931131580 implements MigrationInterface {
 
         // Generate random access logs. From zero to 39.
         for (let j = 0; j < Math.floor(Math.random() * (40)); j++) {
-          const randomDate = this.getRandomDate(initialDate, new Date(2020, 4, 15, 18), 9, 20);
+          const randomDate = this.getRandomDate(initialDate, new Date(), 9, 20);
           if (randomDate.getDate() === initialDate.getDate()) {
             continue;
           }
           initialDate = randomDate;
 
+          // Generate non-client vehicles too
+          for (let u = 0; u < Math.floor(Math.random() * (2)); u++) {
+            await getRepository(AccessLog).save({
+              plate: this.generateRandomPlate(),
+              createdAt: String(randomDate),
+              leaveTime: String(
+                this.getRandomDate(randomDate,
+                  randomDate,
+                  randomDate.getHours(),
+                  randomDate.getHours() + Math.floor(Math.random() * (2)))
+              )
+            });
+          }
+
+          // Generate identified clients accesses
           await getRepository(AccessLog).save({
             vehicle: vehicle,
             plate: vehicle.plate,
@@ -35,7 +51,8 @@ export class DummyClients1590931131580 implements MigrationInterface {
               this.getRandomDate(randomDate,
                 randomDate,
                 randomDate.getHours(),
-                randomDate.getHours() + Math.floor(Math.random() * (2))))
+                randomDate.getHours() + Math.floor(Math.random() * (2)))
+            )
           });
         }
       }

@@ -7,19 +7,9 @@ import * as helmet from 'helmet';
 import routes from './routes';
 import * as passport from 'passport';
 import { JWTStrategyConfig } from './loader/PassportLoader';
+import { DatabaseConfig } from './loader/TypeORMConfig';
 
-createConnection({
-  name: 'default',
-  type: 'mysql',
-  host: 'intellipark.cjlzadsgmftp.us-east-1.rds.amazonaws.com',
-  port: 3306,
-  username: 'admin',
-  password: 'g0dsenkuxd',
-  database: 'intellipark',
-  entities: [
-    'entity/*.js'
-  ]
-}).then(async connection => {
+createConnection(DatabaseConfig).then(async connection => {
   // create express app
   const app = express();
   app.use(bodyParser.json());
@@ -42,5 +32,6 @@ createConnection({
   // Uncomment line below to insert dummy test data
   // await connection.runMigrations();
 
-  console.log('TS-Backend started on http://localhost:3000');
+  console.log('IntelliPark backend service was started on http://localhost:3000');
+  console.log('Version 1.0 - 06/12/2020 23:51 - @dhernandez0798');
 }).catch((error) => console.log(error));
